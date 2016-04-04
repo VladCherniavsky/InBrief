@@ -30,16 +30,16 @@ function signup (req, res, next) {
 }
 
 function login (req, res, next) {
-    console.log('login request');
     User
         .findOne({email: req.body.email})
         .then(success)
         .catch(next);
 
     function success (user) {
+        console.log('login request', user);
         if (!user) {
             res.json({success: false, message: 'Authentication failed. User not found'});
-        } else if (crypto.compareHashes(req.body.password, user.password)) {
+        } else if (!crypto.comparePassword(req.body.password, user.password)) {
             console.log(user.password );
             console.log(req.body.password);
             res.json({success: false, message: 'Authentication failed. Wrong password'});

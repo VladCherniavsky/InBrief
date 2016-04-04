@@ -1,16 +1,13 @@
-var Promise = require('bluebird'),
-    bcrypt = Promise.promisifyAll(require('bcrypt-nodejs'));
-
-
+var bcrypt = require('bcryptjs');
 
 function getHash (string) {
-        return bcrypt.hashAsync(string, null, null);
+    var salt = bcrypt.genSaltSync(10);
+    return  bcrypt.hashSync(string, salt);
 }
 
-function compareHashes (string, hash) {
-    return bcrypt.compare(string, hash, function () {
-    });
+function comparePassword (string, hash) {
+    return bcrypt.compareSync(string, hash);
 }
 
 exports.getHash = getHash;
-exports.compareHashes = compareHashes;
+exports.comparePassword = comparePassword;
