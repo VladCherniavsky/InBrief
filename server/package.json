@@ -17,9 +17,19 @@
   },
   "homepage": "https://github.com/VladCherniavsky/InBrief#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.3.4",
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "hashids": "^1.0.2",
-    "jscs": "^2.11.0"
+    "jscs": "^2.11.0",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.4.11",
+    "mongoose-unique-validator": "^1.0.2",
+    "morgan": "^1.7.0",
+    "nconf": "^0.8.4",
+    "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
@@ -38,6 +48,7 @@
     "gulp-uglify": "^1.5.3",
     "gulp-watch": "^4.3.5",
     "jshint-stylish": "^2.1.0",
+    "jsonwebtoken": "^5.7.0",
     "main-bower-files": "^2.8.2",
     "wiredep": "^4.0.0"
   }

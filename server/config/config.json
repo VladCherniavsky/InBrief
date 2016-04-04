@@ -1,0 +1,9 @@
+{
+  "port": 3000,
+  "db": {
+    "connection": "mongodb://vlad:123@ds015690.mlab.com:15690/inbriefdb",
+    "name": "inbriefdb"
+  },
+  "key": "vlados",
+  "expirationPeriod": "15s"
+}

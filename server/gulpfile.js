@@ -21,13 +21,13 @@ var dirs = {
     bower: '../public/bower_components'
 };
 var path = {
-    serverJs: ['*.js', 'libs/**/*.js'],
+    serverJs: ['../server/**/*.js', '!../server/node_modules/**/*.js'],
     clientJs: [dirs.app + '/**/*.js'],
-    jsFiles:['*.js', 'libs/**/*.js', dirs.app + '/**/*.js']
+    jsFiles:['*.js', '**/*.js', '!node_modules/**/*.js', dirs.app + '/**/*.js']
 };
 
 gulp.task('style', function () {
-    return gulp.src(path.jsFiles)
+    return gulp.src(path.serverJs)
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish', {
             verbose: true
@@ -88,7 +88,7 @@ gulp.task('watch', function() {
     watch(dirs.app + '/**/*.js', executeTask('style'));
     watch(dirs.app + '/**/*.js', executeTask('js:debug'));
     watch(dirs.dest + '/js/**/*.js', executeTask('inject'));
-
+    watch(path.serverJs, executeTask('style'));
 });
 gulp.task('templates', function() {
     var opts = {
