@@ -1,12 +1,12 @@
 (function() {
-    angular.module('InBrief', [])
+    angular
+        .module('InBrief', [
+            'ui.router'
+        ])
         .controller('Main', MainController);
 
-    function MainController ($scope, hello, $timeout) {
-        $scope.vlad = hello.getString();
-        $timeout(function () {
-            console.log(hello.getString());
-        }, 0);
+    function MainController ($scope) {
+        $scope.vlad = 'sss';
     }
 
 }());

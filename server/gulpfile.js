@@ -13,17 +13,21 @@ var gulp = require('gulp'),
     wiredep = require('wiredep').stream,
     angularFilesort = require('gulp-angular-filesort'),
     watch = require('gulp-watch'),
+    autoprefixer = require('gulp-autoprefixer'),
+    sass = require('gulp-sass'),
     inject = require('gulp-inject');
 
 var dirs = {
     app: '../public/app',
     dest: '../_build',
-    bower: '../public/bower_components'
+    bower: '../public/bower_components',
+    assets: '../public/assets'
 };
 var path = {
     serverJs: ['../server/**/*.js', '!../server/node_modules/**/*.js'],
     clientJs: [dirs.app + '/**/*.js'],
-    jsFiles:['*.js', '**/*.js', '!node_modules/**/*.js', dirs.app + '/**/*.js']
+    jsFiles:['*.js', '**/*.js', '!node_modules/**/*.js', dirs.app + '/**/*.js'],
+    css: [dirs.bower + '/bootstrap/dist/css/bootstrap.min.css', dirs.assets + '/style/css/**.*css']
 };
 
 gulp.task('style', function () {
@@ -54,11 +58,11 @@ gulp.task('serve', ['style'], function () {
 });
 gulp.task('js:bower', function() {
     return gulp.src('../public/bower.json')
-      .pipe(mainBowerFiles())
-      .pipe(gulpFilter('**/*.js'))
-      .pipe(uglify())
-      .pipe(concat('vendor.js'))
-      .pipe(gulp.dest('../_build/js'));
+        .pipe(mainBowerFiles())
+        .pipe(gulpFilter('**/*.js'))
+        .pipe(uglify())
+        .pipe(concat('vendor.js'))
+        .pipe(gulp.dest('../_build/js'));
 });
 
 gulp.task('inject', function () {
@@ -68,7 +72,9 @@ gulp.task('inject', function () {
     var sources = gulp.src([
         dirs.dest + '/js/vendor.js',
         dirs.dest + '/js/app.js',
-        dirs.dest + '/js/templates.js'], {read: false});
+        dirs.dest + '/js/templates.js',
+        dirs.dest + '/css/**.*css'
+    ], {read: false});
     return gulp.src('../_build/index.html')
         .pipe(inject(sources, options))
         .pipe(gulp.dest(dirs.dest));
@@ -100,10 +106,21 @@ gulp.task('templates', function() {
         .pipe(uglify())
         .pipe(gulp.dest(dirs.dest + '/js'));
 });
+gulp.task('sass:compile', function() {
+    return gulp.src(dirs.assets + '/style/scss/**.*scss')
+        .pipe(sass())
+        .pipe(concat('style.css'))
+        .pipe(gulp.dest(dirs.assets + '/style/css'));
+});
+gulp.task('css:compile', ['sass:compile'], function() {
+    return gulp.src(path.css)
+        .pipe(autoprefixer())
+        .pipe(concat('style.css'))
+        .pipe(gulp.dest(dirs.dest + '/css'));
+})
 
 function executeTask(name) {
     return function() {
         gulp.start(name);
     };
 }
-

@@ -1,6 +1,6 @@
 var User = require('../models/user'),
     jwt = require('jsonwebtoken'),
-    crypto = require('../libs/crypto.js');
+    crypto = require('../libs/crypto.js'),
     config = require('../config');
 
 exports.signup = signup;
@@ -40,7 +40,7 @@ function login (req, res, next) {
         if (!user) {
             res.json({success: false, message: 'Authentication failed. User not found'});
         } else if (!crypto.comparePassword(req.body.password, user.password)) {
-            console.log(user.password );
+            console.log(user.password);
             console.log(req.body.password);
             res.json({success: false, message: 'Authentication failed. Wrong password'});
         } else {
@@ -55,7 +55,6 @@ function login (req, res, next) {
             res.cookie('token', token);
             res.json({success: true, message: 'ok',  user: userShortInfo, token: token});
         }
-
 
     }
 }

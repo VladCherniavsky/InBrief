@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/VladCherniavsky/InBrief#readme",
   "dependencies": {
-    "bcryptjs": "^2.3.0",
     "bluebird": "^3.3.4",
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.1",
@@ -35,6 +34,7 @@
     "gulp": "^3.9.1",
     "gulp-angular-filesort": "^1.1.1",
     "gulp-angular-templatecache": "^1.8.0",
+    "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-filter": "^2.0.2",
     "gulp-inject": "^4.0.0",
@@ -44,6 +44,7 @@
     "gulp-minify-html": "^1.0.6",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-nodemon": "^2.0.6",
+    "gulp-sass": "^2.2.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
     "gulp-watch": "^4.3.5",
