@@ -1,8 +1,8 @@
-var hashPassword = require('../libs/crypto.js');
+var crypto = require('../libs/crypto.js');
 
-module.exports = function (req, res, next) {
+function getHash (req, res, next) {
     if (req.body.password) {
-        hashPassword(req.body.password)
+        crypto.getHash(req.body.password)
             .then(function (hash) {
                 req.body.password = hash;
                 next();
@@ -11,4 +11,6 @@ module.exports = function (req, res, next) {
     } else {
         throw new Error('Password field required');
     }
-};
+}
+
+exports.getHash = getHash;
