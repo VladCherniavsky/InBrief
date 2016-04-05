@@ -4,6 +4,6 @@
     "connection": "mongodb://vlad:123@ds015690.mlab.com:15690/inbriefdb",
     "name": "inbriefdb"
   },
-  "key": "vlados",
+  "key": "test",
   "expirationPeriod": "15s"
 }

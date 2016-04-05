@@ -9,9 +9,7 @@ function getHash (string) {
 }
 
 function comparePassword (string, hash) {
-    bcrypt.compare(string, hash, function(err, res) {
-        return res;
-    });
+    return bcrypt.compareSync(string, hash);
 }
 
 exports.getHash = getHash;

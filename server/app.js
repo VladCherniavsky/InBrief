@@ -7,7 +7,8 @@ var express     = require('express'),
     db = require('./libs/mongoose'),
     config = require('./config');
 
-var userRouter = require('./routes/userRouter.js');
+var userRouter = require('./routes/userRouter.js'),
+    linkRouter = require('./routes/linkRouter.js');
 
 var app = express();
 app.use(bodyParser.urlencoded({extended:false}));
@@ -19,6 +20,7 @@ app.use(morgan('dev'));
 
 app.use(express.static(__dirname + '../../_build'));
 app.use('/api', userRouter);
+app.use('/api', linkRouter);
 
 app.use(function(err, req, res, next) {
     console.log('app.err', err);

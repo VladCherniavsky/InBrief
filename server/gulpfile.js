@@ -27,7 +27,9 @@ var path = {
     serverJs: ['../server/**/*.js', '!../server/node_modules/**/*.js'],
     clientJs: [dirs.app + '/**/*.js'],
     jsFiles:['*.js', '**/*.js', '!node_modules/**/*.js', dirs.app + '/**/*.js'],
-    css: [dirs.bower + '/bootstrap/dist/css/bootstrap.min.css', dirs.assets + '/style/css/**.*css']
+    css: [dirs.bower + '/bootstrap/dist/css/bootstrap.min.css', dirs.assets + '/style/css/**.*css'],
+    indexFile: '../public/index.html'
+
 };
 
 gulp.task('style', function () {
@@ -117,7 +119,14 @@ gulp.task('css:compile', ['sass:compile'], function() {
         .pipe(autoprefixer())
         .pipe(concat('style.css'))
         .pipe(gulp.dest(dirs.dest + '/css'));
-})
+});
+gulp.task('index', function() {
+    return gulp.src(path.indexFile)
+        .pipe(gulp.dest(dirs.dest));
+});
+gulp.task('build',['index', 'js:bower', 'js:debug', 'css:compile'], function () {
+    gulp.start('inject');
+});
 
 function executeTask(name) {
     return function() {

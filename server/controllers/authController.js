@@ -1,6 +1,6 @@
 var User = require('../models/user'),
-    jwt = require('jsonwebtoken'),
     crypto = require('../libs/crypto.js'),
+    jwtToken = require('../libs/jwtToken.js'),
     config = require('../config');
 
 exports.signup = signup;
@@ -40,20 +40,16 @@ function login (req, res, next) {
         if (!user) {
             res.json({success: false, message: 'Authentication failed. User not found'});
         } else if (!crypto.comparePassword(req.body.password, user.password)) {
-            console.log(user.password);
-            console.log(req.body.password);
             res.json({success: false, message: 'Authentication failed. Wrong password'});
         } else {
             var userShortInfo = {
                 id: user._id,
                 userName: user.userName
             };
-            console.log('userShortInfo', userShortInfo);
-            var token = jwt.sign(userShortInfo, config.get('key'), {
-                expiresIn: config.get('expirationPeriod')
-            });
-            res.cookie('token', token);
-            res.json({success: true, message: 'ok',  user: userShortInfo, token: token});
+
+            var token = jwtToken.generateToken(userShortInfo, config.get('key'),config.get('expirationPeriod'));
+            res.setHeader('x-access-token', token);
+            res.json({success: true, message: 'Loged in',  user: userShortInfo});
         }
 
     }
