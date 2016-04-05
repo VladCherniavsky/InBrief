@@ -4,4 +4,5 @@ var express = require('express'),
     resignToken = require('../middlewares/resignToken');
 
 router.get('/links', decodeToken, resignToken);
+router.get('/links', decodeToken, resignToken);
 module.exports = router;

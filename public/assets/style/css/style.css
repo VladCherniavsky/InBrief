@@ -1,2 +1,8 @@
 body {
   color: red; }
+
+a:hover {
+  cursor: pointer; }
+
+.navbar {
+  border-radius: 0px; }

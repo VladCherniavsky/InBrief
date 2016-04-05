@@ -124,7 +124,7 @@ gulp.task('index', function() {
     return gulp.src(path.indexFile)
         .pipe(gulp.dest(dirs.dest));
 });
-gulp.task('build',['index', 'js:bower', 'js:debug', 'css:compile'], function () {
+gulp.task('build',['index','templates', 'js:bower', 'js:debug', 'css:compile'], function () {
     gulp.start('inject');
 });
 
