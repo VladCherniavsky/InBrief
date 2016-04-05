@@ -6,3 +6,15 @@ a:hover {
 
 .navbar {
   border-radius: 0px; }
+
+.nav-tabs > li {
+  width: 50%;
+  float: left;
+  margin-bottom: -1px; }
+  .nav-tabs > li a {
+    margin-right: 0px;
+    border-radius: 0px 0px 0 0; }
+
+.alertify-log-success {
+  background: black;
+  background: black; }

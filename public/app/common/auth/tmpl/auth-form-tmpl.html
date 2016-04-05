@@ -1,0 +1,48 @@
+<ul class="nav nav-tabs">
+
+    <li ng-class="{'active':authform.loginTab}"
+        ng-click="authform.loginTab = !authform.loginTab;">
+        <a >Login to service</a>
+    </li>
+
+    <li ng-class="{'active':!authform.loginTab}"
+        ng-click="authform.loginTab = !authform.loginTab;">
+        <a >Sign Up</a>
+    </li>
+</ul>
+<br>
+<form role="form" ng-if="authform.loginTab">
+
+    <div class="form-group">
+        <label for="emailLogin"> Email:</label>
+        <input type="text" id="emailLogin" class="form-control" ng-model="authform.user.email"  placeholder="Enter Email">
+    </div>
+    <div class="form-group">
+        <label for="passwordLogin"> Password:</label>
+        <input type="password" id="passwordLogin" class="form-control" ng-model="authform.user.password"  placeholder="Enter password">
+    </div>
+    <br>
+    <div class="modal-footer">
+        <input type="submit" value="Login to..." ng-click="authform.login(authform.user)" class="btn btn-default"/>
+        <input type="button" class="btn btn-default" ng-click="authform.cancel(authform.user)" value="cancel" />
+    </div>
+</form>
+<form  role="form" ng-if="!authform.loginTab">
+    <div class="form-group">
+        <label for="username"> Username:</label>
+        <input type="text" id="username" class="form-control" ng-model="authform.user.userName"  placeholder="Enter username">
+    </div>
+    <div class="form-group">
+        <label for="email"> Email:</label>
+        <input type="text" id="email" class="form-control" ng-model="authform.user.email"  placeholder="Enter Email">
+    </div>
+    <div class="form-group">
+        <label for="password"> Password:</label>
+        <input type="password" name="password" id="password" class="form-control" ng-model="authform.user.password"  placeholder="Enter password">
+    </div>
+    <br>
+    <div class="modal-footer">
+        <input  type="submit" value="Sign Up" ng-click="authform.signup(authform.user)" class="btn btn-default"/>
+        <input  type="button" class="btn btn-default" ng-click="authform.cancel(authform.user)" value="cancel" />
+    </div>
+</form>

@@ -5,5 +5,5 @@
     "name": "inbriefdb"
   },
   "key": "test",
-  "expirationPeriod": "15s"
+  "expirationPeriod": "30d"
 }

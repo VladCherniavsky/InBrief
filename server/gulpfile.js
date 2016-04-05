@@ -27,7 +27,11 @@ var path = {
     serverJs: ['../server/**/*.js', '!../server/node_modules/**/*.js'],
     clientJs: [dirs.app + '/**/*.js'],
     jsFiles:['*.js', '**/*.js', '!node_modules/**/*.js', dirs.app + '/**/*.js'],
-    css: [dirs.bower + '/bootstrap/dist/css/bootstrap.min.css', dirs.assets + '/style/css/**.*css'],
+    css: [
+        dirs.bower + '/bootstrap/dist/css/bootstrap.min.css',
+        dirs.bower + '/ng-alertify/dist/ng-alertify.css',
+        dirs.assets + '/style/css/**.*css'
+        ],
     indexFile: '../public/index.html'
 
 };
@@ -116,7 +120,7 @@ gulp.task('sass:compile', function() {
 });
 gulp.task('css:compile', ['sass:compile'], function() {
     return gulp.src(path.css)
-        .pipe(autoprefixer())
+        //.pipe(autoprefixer())
         .pipe(concat('style.css'))
         .pipe(gulp.dest(dirs.dest + '/css'));
 });
