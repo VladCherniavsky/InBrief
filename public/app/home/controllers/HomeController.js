@@ -8,6 +8,10 @@
 
         $rootScope.$on('logged', loggedProcess);
         $rootScope.$on('logout', logoutProcess);
+        
+        console.log('rs', $rootScope.logged);
+        console.log('ss', self.logged);
+        self.logged = $rootScope.logged;
 
         function loggedProcess () {
             console.log('$rootScope.logged', $rootScope.logged);
