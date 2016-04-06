@@ -5,6 +5,8 @@
 
     function LinksController (linkService) {
         var self = this;
-        linkService.getLinks();
+        linkService.getLinks().then(function (res) {
+            console.log(res);
+        });
     }
 }());

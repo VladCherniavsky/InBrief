@@ -1,15 +1,12 @@
 var express = require('express'),
     router = express.Router(),
-    decodeToken = require('../middlewares/decodeToken.js'),
-    resignToken = require('../middlewares/resignToken');
+    checkToken = require('../middlewares/checkToken'),
+    decodeToken = require('../middlewares/decodeToken'),
+    resignToken = require('../middlewares/resignToken'),
+    linkController = require('../controllers/linkController');
 
-router.get('/links', decodeToken, resignToken, function (req, res, next) {
-    var userShortInfo = {
-        userName: req.decoded.userName,
-        id: req.decoded.id
-    };
-
-    res.json({success: true, message: 'links',  user: userShortInfo});
-});
+router.get('/', decodeToken, resignToken, linkController.getUserLinks);
+router.post('/links', checkToken, resignToken, linkController.addLink);
+router.get('/links', decodeToken, resignToken, linkController.getAllLinks);
 
 module.exports = router;

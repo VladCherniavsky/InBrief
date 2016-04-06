@@ -7,6 +7,7 @@
         var self = this;
         self.loginUser = loginUser;
         self.signupUser = signupUser;
+        self.defaultRequest = defaultRequest;
 
         function loginUser (user) {
             return  $http({
@@ -20,6 +21,12 @@
                 method: 'POST',
                 url: 'api/signup',
                 data: user
+            })
+        }
+        function defaultRequest () {
+            return  $http({
+                method: 'GET',
+                url: 'api/'
             })
         }
     }

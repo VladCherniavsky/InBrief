@@ -19,7 +19,8 @@ var link = new Schema({
     },
     userId: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     tags:{
         type: [{
@@ -36,7 +37,6 @@ var link = new Schema({
                 type: Date,
                 default: Date.now
             }
-
         }]
     }
 

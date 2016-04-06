@@ -19,8 +19,6 @@ function signup (req, res, next) {
         .catch(next);
 
     function successFunction (user) {
-        console.log('User saved successfully');
-        console.log(user);
         res.json({
             success: true,
             message: 'User is registered',

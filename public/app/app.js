@@ -12,10 +12,13 @@
     function config ($httpProvider) {
         $httpProvider.interceptors.push('authIntercepor');
     }
-    function runBlock ($rootScope, $cookies) {
+    function runBlock ($rootScope, $cookies, authService) {
         $rootScope.logged = false;
         $rootScope.$on('logged', loggedProcess);
         $rootScope.$on('logout', logoutProcess);
+
+        authService.defaultRequest();
+
 
         function loggedProcess () {
             $rootScope.logged = true;
