@@ -3,7 +3,7 @@
         .module('InBrief')
         .controller('NavBarController', NavBarController);
 
-    function NavBarController ($uibModal, $rootScope, $timeout, $cookies) {
+    function NavBarController ($uibModal, $rootScope, $timeout, $cookies, modalService) {
         var self = this;
 
         self.animationsEnabled = true;
@@ -13,23 +13,14 @@
         $rootScope.$on('logout', logoutProcess);
 
         function loggedProcess () {
-            console.log('$rootScope.logged', $rootScope.logged);
-            $timeout(function () {
-                self.logged = true;
-            }, 0);
+            self.logged = true;
         }
+        
         function logoutProcess () {
-            angular.forEach($cookies.getAll(), function (v, k) {
-                $cookies.remove(k);
-            });
-            $timeout(function () {
-                self.logged = false;
-                $rootScope.logged = false;
-            }, 0);
-
+            self.logged = false;
         }
 
-        function open (size) {
+        /*function open (size) {
             var modalInstance = $uibModal.open({
                 animation: self.animationsEnabled,
                 templateUrl: 'common/navBar/views/modalAuth-tmpl.html',
@@ -37,6 +28,9 @@
                 controllerAs: 'modalAuth',
                 size: size
             });
+        }*/
+        function open () {
+            var modalInstance = modalService.getModal(true, 'common/modals.tmpl/templates/modalAuth-tmpl.html', 'ModalAuthController', 'modalAuth');
         }
         function logout () {
             $rootScope.$broadcast('logout');

@@ -18,3 +18,6 @@ a:hover {
 .alertify-log-success {
   background: black;
   background: black; }
+
+.right {
+  float: right; }

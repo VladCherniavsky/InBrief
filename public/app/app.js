@@ -12,13 +12,20 @@
     function config ($httpProvider) {
         $httpProvider.interceptors.push('authIntercepor');
     }
-    function runBlock ($rootScope) {
+    function runBlock ($rootScope, $cookies) {
         $rootScope.logged = false;
-        console.log('run');
         $rootScope.$on('logged', loggedProcess);
+        $rootScope.$on('logout', logoutProcess);
 
         function loggedProcess () {
             $rootScope.logged = true;
+        }
+        
+        function logoutProcess () {
+            angular.forEach($cookies.getAll(), function (v, k) {
+                $cookies.remove(k);
+            });
+            $rootScope.logged = false;
         }
     }
 }());
