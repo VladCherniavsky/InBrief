@@ -7,6 +7,7 @@
     "node",
     "yui"
   ],
+
   "authors": [
     "vlad.cherniavsky@gmail.com"
   ],
@@ -18,6 +19,7 @@
     "test",
     "tests"
   ],
+  "directory" : "public/components",
   "dependencies": {
     "angular": "^1.5.3",
     "angular-ui-router": "^0.2.18",
