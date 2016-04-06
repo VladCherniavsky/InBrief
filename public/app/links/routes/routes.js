@@ -5,13 +5,11 @@
 
     function config ($stateProvider) {
         $stateProvider
-            .state('/', {
-                url: '/',
-                templateUrl: 'links/views/main.html'
-            })
             .state('links', {
                 url: '/links',
-                templateUrl: 'links/views/listLinks.html'
+                templateUrl: 'links/views/listLinks.html',
+                controller: 'LinksController',
+                controllerAs: 'links'
             });
 
     }

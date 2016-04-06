@@ -6,7 +6,7 @@
         <li ><a ui-sref="links">Links</a></li>
     </ul>
     <ul class="nav navbar-nav right">
-        <li  ng-hide="loggedIn"><a ng-click="navBar.open()">Log In</a></li>
-        <li  ng-show="loggedIn"><a href="#" ng-click="navBar.ok()">Log Out</a></li>
+        <li  ng-hide="navBar.logged"><a ng-click="navBar.open()">Log In</a></li>
+        <li  ng-show="navBar.logged"><a  ng-click="navBar.logout()">Log Out</a></li>
     </ul>
 </nav>

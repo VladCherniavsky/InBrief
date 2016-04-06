@@ -4,6 +4,7 @@ var jwtToken = require('../libs/jwtToken.js'),
 module.exports = function (req, res, next) {
     console.log('decodeToken middlaware');
     var token = jwtToken.getToken(req);
+    console.log('token', token);
     if (token) {
         jwtToken.verifyToken(token, config.get('key'), function (err, decoded) {
             if (err) {

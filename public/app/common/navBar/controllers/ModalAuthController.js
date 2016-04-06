@@ -5,8 +5,6 @@
 
     function ModalAuthController ($uibModalInstance) {
         var self = this;
-
-
         self.ok = function () {
             $uibModalInstance.close();
         };

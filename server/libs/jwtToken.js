@@ -6,7 +6,8 @@ exports.generateToken = generateToken;
 exports.verifyToken = verifyToken;
 
 function getToken (req) {
-    return req.headers['x-access-token'] || req.body.token || req.query.token ||  req.cookies.token;
+    console.log('req.cookies.token', req.cookies.token);
+    return req.cookies.token;
 }
 
 function generateToken (data, key, expirationPeriod) {
