@@ -3,7 +3,7 @@
         .module('InBrief')
         .controller('AuthFormController', AuthFormController);
 
-    function AuthFormController (authService, Alertify) {
+    function AuthFormController (authService, Alertify, $state) {
         var self = this;
         self.loginTab = true;
         self.login = login;
@@ -16,6 +16,7 @@
                 .loginUser(user)
                 .then(function (res) {
                     if (res.data.success) {
+                        $state.go('/');
                         Alertify.success(res.data.message);
                     } else {
                         console.log(res);

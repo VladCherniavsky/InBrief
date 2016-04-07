@@ -4,22 +4,28 @@
             <div class="col-lg-12">
                 <div class="input-group">
                     <input type="text"
+                           id="originalUrl"
                            class="form-control"
                            ng-model="home.link.orginalLink"
                            placeholder="Put URL here...">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" ng-click="home.addLink(home.link)" type="button">Go!</button>
+                        <button class="btn btn-default" ng-click="home.addLink(home.link)" type="button"> Go! </button>
                     </span>
                 </div>
                 <br/>
                 <div class="input-group">
+                    <label for="shortDescription"> Short description </label>
                     <input type="text"
                            class="form-control"
+                           id="shortDescription"
                            placeholder="Add short description"
                            ng-model="home.link.description">
                 </div>
+                <br/>
                 <div class="input-group">
+                    <label for="tags"> Tags </label>
                     <input type="text"
+                           id="tags"
                            class="form-control"
                            placeholder="Write tags here..."
                            ng-model="home.link.tags">

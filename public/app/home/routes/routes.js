@@ -3,7 +3,9 @@
         .module('InBrief')
         .config(config);
 
-    function config ($stateProvider) {
+    function config ($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('/');
+
         $stateProvider
             .state('/', {
                 url: '/',
