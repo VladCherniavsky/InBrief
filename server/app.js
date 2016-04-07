@@ -8,6 +8,7 @@ var express     = require('express'),
     config = require('./config');
 
 var userRouter = require('./routes/userRouter.js'),
+    redirectRouter = require('./routes/redirectRouter'),
     linkRouter = require('./routes/linkRouter.js');
 
 var app = express();
@@ -19,12 +20,13 @@ app.use(morgan('dev'));
 //app.use(favicon(__dirname + '../../public/assets/favicon.ico'))
 
 app.use(express.static(__dirname + '../../_build'));
+app.use('/', redirectRouter);
 app.use('/api', userRouter);
 app.use('/api', linkRouter);
 
 app.use(function(err, req, res, next) {
     console.log('app.err', err);
-    return res.status(err.status ? err.status : 500).json({success:false, error: err});
+    return res.status(err.status ? err.status : 400).json({success:false, error: err});
 });
 
 var port = process.env.PORT || config.get('port');

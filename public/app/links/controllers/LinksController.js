@@ -3,10 +3,8 @@
         .module('InBrief')
         .controller('LinksController', LinksController);
 
-    function LinksController (linkService) {
+    function LinksController (linkService, resolvedLinks) {
         var self = this;
-        linkService.getLinks().then(function (res) {
-            console.log(res);
-        });
+        self.links = resolvedLinks;
     }
 }());

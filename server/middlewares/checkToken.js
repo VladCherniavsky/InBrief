@@ -19,5 +19,10 @@ module.exports = function (req, res, next) {
                 next();
             }
         });
+    } else {
+        return res.json({
+            success:false,
+            message:'Failed to authenticate token. Please log in'
+        });
     }
 };

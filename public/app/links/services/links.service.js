@@ -12,15 +12,15 @@
             return $http({
                 method: 'GET',
                 url: 'api/links'
-            })
+            });
         }
 
         function addLink (link) {
-            return  $http({
+            return $http({
                 method: 'POST',
                 url: 'api/links',
                 data: link
-            })
+            });
         }
 
     }

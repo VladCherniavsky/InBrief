@@ -10,20 +10,21 @@
         self.signup = signup;
         self.cancel = cancel;
 
-
         function login (user) {
             console.log('user', user);
             authService
                 .loginUser(user)
                 .then(function (res) {
-                    if(res.data.success) {
+                    if (res.data.success) {
                         Alertify.success(res.data.message);
                     } else {
+                        console.log(res);
                         Alertify.error(res.data.message);
                     }
                     self.close();
                 }).catch(function (err) {
-                    Alertify.error(err.message);
+                    console.log(err);
+                    Alertify.error(err.data.error.message);
                 });
             console.log('user', user);
 
@@ -32,17 +33,17 @@
             authService.
                 signupUser(user)
                 .then(function (res) {
-                    if(res.data.success) {
+                    if (res.data.success) {
                         Alertify.success(res.data.message);
                     } else {
                         console.log(res);
-                        Alertify.error(res.data.message);
+                        Alertify.error(res.data.c);
                     }
                     self.loginTab = true;
                     self.user = null;
                 }).catch(function (err) {
                     console.log(err);
-                    Alertify.error(err.message);
+                    Alertify.error(err.data.error.message);
                 });
 
         }

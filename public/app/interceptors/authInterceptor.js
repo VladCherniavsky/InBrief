@@ -14,8 +14,8 @@
                 if (token !== null) {
                     console.log('check',response.headers('x-access-token'));
                     $cookies.put('token', token);
-                    if(response.data.user) $cookies.put('id', response.data.user.id);
-                    if(response.data.user) $cookies.put('userName', response.data.user.userName);
+                    if (response.data.user) { $cookies.put('id', response.data.user.id); }
+                    if (response.data.user) { $cookies.put('userName', response.data.user.userName); }
                     $rootScope.$broadcast('logged');
                 }
                 return response;

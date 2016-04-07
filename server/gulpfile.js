@@ -24,7 +24,7 @@ var dirs = {
     assets: '../public/assets'
 };
 var path = {
-    serverJs: ['../server/**/*.js', '!../server/node_modules/**/*.js'],
+    serverJs: ['../server/**/*.js', '!../server/node_modules/**/*.js', dirs.app + '/**/*.js'],
     clientJs: [dirs.app + '/**/*.js'],
     jsFiles:['*.js', '**/*.js', '!node_modules/**/*.js', dirs.app + '/**/*.js'],
     css: [

@@ -9,8 +9,22 @@
                 url: '/links',
                 templateUrl: 'links/views/listLinks.html',
                 controller: 'LinksController',
-                controllerAs: 'links'
+                controllerAs: 'linksCtrl',
+                resolve: {
+                    resolvedLinks: getLinks
+                }
             });
+
+        function getLinks (linkService, Alertify) {
+            return linkService
+                .getLinks()
+                .then(function (res) {
+                    return res.data.links;
+                })
+                .catch(function (err) {
+                    Alertify.error('Error getting links');
+                });
+        }
 
     }
 } ());

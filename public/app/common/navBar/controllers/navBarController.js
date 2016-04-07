@@ -15,20 +15,11 @@
         function loggedProcess () {
             self.logged = true;
         }
-        
+
         function logoutProcess () {
             self.logged = false;
         }
 
-        /*function open (size) {
-            var modalInstance = $uibModal.open({
-                animation: self.animationsEnabled,
-                templateUrl: 'common/navBar/views/modalAuth-tmpl.html',
-                controller: 'ModalAuthController',
-                controllerAs: 'modalAuth',
-                size: size
-            });
-        }*/
         function open () {
             var modalInstance = modalService.getModal(true, 'common/modals.tmpl/templates/modalAuth-tmpl.html', 'ModalAuthController', 'modalAuth');
         }

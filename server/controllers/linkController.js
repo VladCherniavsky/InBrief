@@ -6,6 +6,7 @@ var Link = require('../models/link'),
 exports.addLink = addLink;
 exports.getUserLinks = getUserLinks;
 exports.getAllLinks = getAllLinks;
+exports.redirectToLink = redirectToLink;
 
 function addLink (req, res, next) {
 
@@ -21,7 +22,6 @@ function addLink (req, res, next) {
         .catch(next);
 
     function successFunction (createdLink) {
-        res.setHeader('x-access-token', req.token);
         res.json({
             success: true,
             message: 'Link is added',
@@ -32,18 +32,11 @@ function addLink (req, res, next) {
 
 function getUserLinks (req, res, next) {
     if (req.decoded) {
-        console.log('here');
-        var userShortInfo = {
-            userName: req.decoded.userName,
-            id: req.decoded.id
-        };
-
         Link
             .find({userId: req.decoded.id})
             .then(function (links) {
                 console.log(links);
-                res.setHeader('x-access-token', req.token);
-                res.json({success: true, message: 'Users links',  links: links});
+                res.json({success: true, message: 'Users links',  links: links, user: req.user});
             })
             .catch(next);
     } else {
@@ -51,21 +44,28 @@ function getUserLinks (req, res, next) {
     }
 }
 function getAllLinks (req, res, next) {
+    console.log('getAllLinks');
     Link
         .find()
         .then(allLinks)
         .catch(next);
 
     function allLinks (links) {
+        console.log(links);
         if (req.decoded) {
-            var userShortInfo = {
-                userName: req.decoded.userName,
-                id: req.decoded.id
-            };
-            res.setHeader('x-access-token', req.token);
-            res.json({success: true, message: 'links',  user: userShortInfo, links: links});
+            res.json({success: true, message: 'links',  user: req.user, links: links});
         } else {
             res.json({success: false, message: 'Please log in', links: links});
         }
     }
+}
+function redirectToLink (req, res, next) {
+    console.log(req.params);
+    Link
+        .findOneAndUpdate({shortLink: req.params.shortLink}, {$inc: {clicks: 1}})
+        .then(function (link) {
+            console.log('link', link);
+        })
+        .catch(next);
+
 }

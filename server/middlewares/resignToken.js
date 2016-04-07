@@ -9,10 +9,13 @@ module.exports = function (req, res, next) {
             id: req.decoded.id
         };
         var token = jwtToken.generateToken(userInfo, config.get('key'),config.get('expirationPeriod'));
-        req.token = token;
+        //req.token = token;
+        req.user = userInfo;
+        res.setHeader('x-access-token', token);
         next();
     } else {
         next();
     }
 
 };
+

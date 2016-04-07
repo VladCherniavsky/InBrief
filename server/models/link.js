@@ -22,22 +22,18 @@ var link = new Schema({
         ref: 'User',
         required: true
     },
+    description: {
+        type: String,
+        trim: true
+    },
     tags:{
         type: [{
             type: String,
             trim: true
         }],
     },
-    clicksInfo: {
-        type: [{
-            numberOfClicks:{
-                type: Number
-            },
-            date: {
-                type: Date,
-                default: Date.now
-            }
-        }]
+    clicks: {
+        type: Number
     }
 
 });

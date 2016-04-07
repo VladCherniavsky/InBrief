@@ -19,11 +19,10 @@
 
         authService.defaultRequest();
 
-
         function loggedProcess () {
             $rootScope.logged = true;
         }
-        
+
         function logoutProcess () {
             angular.forEach($cookies.getAll(), function (v, k) {
                 $cookies.remove(k);

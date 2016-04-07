@@ -5,8 +5,11 @@ var express = require('express'),
     resignToken = require('../middlewares/resignToken'),
     linkController = require('../controllers/linkController');
 
-router.get('/', decodeToken, resignToken, linkController.getUserLinks);
-router.post('/links', checkToken, resignToken, linkController.addLink);
-router.get('/links', decodeToken, resignToken, linkController.getAllLinks);
+router.use(decodeToken,resignToken);
+
+router.get('/', linkController.getUserLinks);
+router.post('/links', checkToken, linkController.addLink);
+router.get('/links', linkController.getAllLinks);
+router.get('/:shortLink', linkController.redirectToLink);
 
 module.exports = router;

@@ -27,13 +27,13 @@
             Alertify.success(res.data.message);
         }
         function addLinkError (err) {
-            Alertify.error(res.data.message);
+            Alertify.error(err.data.message);
         }
 
         function loggedProcess () {
             self.logged = true;
         }
-        
+
         function logoutProcess () {
             self.logged = false;
             $rootScope.logged = false;
