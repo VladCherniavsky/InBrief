@@ -7,6 +7,7 @@
         var self = this;
         self.getLinks = getLinks;
         self.addLink = addLink;
+        self.getUserLinks = getUserLinks;
 
         function getLinks (user) {
             return $http({
@@ -20,6 +21,13 @@
                 method: 'POST',
                 url: 'api/links',
                 data: link
+            });
+        }
+
+        function getUserLinks () {
+            return $http({
+                method: 'GET',
+                url: 'api/home'
             });
         }
 

@@ -7,7 +7,7 @@ var express = require('express'),
 
 router.use(decodeToken,resignToken);
 
-router.get('/', linkController.getUserLinks);
+router.get('/home', linkController.getUserLinks);
 router.post('/links', checkToken, linkController.addLink);
 router.get('/links', linkController.getAllLinks);
 router.get('/:shortLink', linkController.redirectToLink);

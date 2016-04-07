@@ -9,7 +9,7 @@
         self.animationsEnabled = true;
         self.open = open;
         self.logout = logout;
-        $rootScope.$on('logged', loggedProcess);
+        /*$rootScope.$on('logged', loggedProcess);
         $rootScope.$on('logout', logoutProcess);
 
         function loggedProcess () {
@@ -18,7 +18,7 @@
 
         function logoutProcess () {
             self.logged = false;
-        }
+        }*/
 
         function open () {
             var modalInstance = modalService.getModal(true, 'common/modals.tmpl/templates/modalAuth-tmpl.html', 'ModalAuthController', 'modalAuth');

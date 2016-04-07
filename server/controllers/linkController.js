@@ -64,7 +64,7 @@ function redirectToLink (req, res, next) {
     Link
         .findOneAndUpdate({shortLink: req.params.shortLink}, {$inc: {clicks: 1}})
         .then(function (link) {
-            if (link.originalLink) {
+            if (link) {
                 res.redirect(link.originalLink);
             }
         })

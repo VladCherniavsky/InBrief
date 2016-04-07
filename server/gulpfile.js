@@ -124,11 +124,15 @@ gulp.task('css:compile', ['sass:compile'], function() {
         .pipe(concat('style.css'))
         .pipe(gulp.dest(dirs.dest + '/css'));
 });
+gulp.task('favicon', function() {
+    return gulp.src(dirs.assets + '/img/**.*ico')
+        .pipe(gulp.dest(dirs.dest + '/img'));
+});
 gulp.task('index', function() {
     return gulp.src(path.indexFile)
         .pipe(gulp.dest(dirs.dest));
 });
-gulp.task('build',['index','templates', 'js:bower', 'js:debug', 'css:compile'], function () {
+gulp.task('build',['index', 'favicon', 'templates', 'js:bower', 'js:debug', 'css:compile'], function () {
     gulp.start('inject');
 });
 

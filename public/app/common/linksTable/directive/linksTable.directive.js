@@ -12,7 +12,8 @@
             controllerAs: 'linksTableCtrl',
             bindToController: {
                 links: '=',
-                details: '&'
+                details: '&',
+                title: '='
             }
         };
     }

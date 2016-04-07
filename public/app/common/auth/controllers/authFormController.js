@@ -16,7 +16,7 @@
                 .loginUser(user)
                 .then(function (res) {
                     if (res.data.success) {
-                        $state.go('/');
+                        $state.go('home');
                         Alertify.success(res.data.message);
                     } else {
                         console.log(res);

@@ -3,41 +3,44 @@
         .module('InBrief')
         .controller('HomeController', HomeController);
 
-    function HomeController ($rootScope, linkService, Alertify) {
+    function HomeController ($rootScope, resolvedUserLinks, Alertify, linkService) {
         var self = this;
+        self.title = 'My links';
         self.logged = $rootScope.logged;
         self.addLink = addLink;
+        self.userLinks = resolvedUserLinks;
+        self.change = change;
 
-        $rootScope.$on('logged', loggedProcess);
-        $rootScope.$on('logout', logoutProcess);
+
 
         function addLink (link) {
-            console.log('link', link);
-            link.tags = link.tags.split();
-            console.log('link', link);
             linkService
                 .addLink(link)
                 .then(addLinkResult)
                 .catch(addLinkError);
-        }
 
-        function addLinkResult (res) {
-            self.link = null;
-            console.log('res', res);
-            Alertify.success(res.data.message);
+            function addLinkResult (res) {
+                self.link = null;
+                self.change();
+                Alertify.success(res.data.message);
+            }
+            function addLinkError (err) {
+                Alertify.error(err.data.message);
+            }
         }
-        function addLinkError (err) {
-            Alertify.error(err.data.message);
-        }
+        function change () {
+            linkService
+                .getUserLinks()
+                .then(getLinksResult)
+                .catch(getLinksError);
 
-        function loggedProcess () {
-            self.logged = true;
-        }
+            function getLinksResult (res) {
+                self.userLinks = res.data.links;
+            }
 
-        function logoutProcess () {
-            self.logged = false;
-            $rootScope.logged = false;
+            function getLinksError (err) {
+                Alertify.error(err.data.message);
+            }
         }
-
     }
 }());

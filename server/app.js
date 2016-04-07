@@ -5,6 +5,7 @@ var express     = require('express'),
     morgan      = require('morgan'),
     favicon = require('serve-favicon'),
     db = require('./libs/mongoose'),
+    favicon = require('serve-favicon');
     config = require('./config');
 
 var userRouter = require('./routes/userRouter.js'),
@@ -17,7 +18,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(methodOverride());
 app.use(morgan('dev'));
-//app.use(favicon(__dirname + '../../public/assets/favicon.ico'))
+app.use(favicon(__dirname + '../../_build/img/favicon.ico'));
 
 app.use(express.static(__dirname + '../../_build'));
 app.use('/', redirectRouter);
