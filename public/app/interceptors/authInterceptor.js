@@ -5,15 +5,15 @@
 
     function authIntercepor ($cookies, $rootScope) {
         var authIntercepor = {
-            request: function (config) {
-                return config;
-            },
             response: function(response) {
-                var token = response.headers('x-access-token');
+                var token = response.headers('x-access-token'),
+                    id = response.headers('id'),
+                    userName = response.headers('userName');
+
                 if (token !== null) {
                     $cookies.put('token', token);
-                    if (response.data.user) { $cookies.put('id', response.data.user.id); }
-                    if (response.data.user) { $cookies.put('userName', response.data.user.userName); }
+                    if (id) { $cookies.put('id', id); }
+                    if (userName) { $cookies.put('userName', userName); }
                     $rootScope.$broadcast('logged');
                 }
                 return response;

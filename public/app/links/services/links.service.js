@@ -27,7 +27,7 @@
         function getUserLinks () {
             return $http({
                 method: 'GET',
-                url: 'api/home'
+                url: 'api/userLinks'
             });
         }
 

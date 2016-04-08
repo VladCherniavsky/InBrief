@@ -14,44 +14,36 @@
             console.log('user', user);
             authService
                 .loginUser(user)
-                .then(function (res) {
-                    if (res.data.success) {
-                        $state.go('home');
-                        Alertify.success(res.data.message);
-                    } else {
-                        console.log(res);
-                        Alertify.error(res.data.message);
-                    }
-                    self.close();
-                }).catch(function (err) {
-                    console.log(err);
-                    Alertify.error(err.data.error.message);
-                });
-            console.log('user', user);
+                .then(loginSuccess)
+                .catch(errorHandler);
 
+            function loginSuccess (res) {
+                $state.go('home');
+                Alertify.success(res.data);
+                self.close();
+            }
         }
         function signup (user) {
             authService.
                 signupUser(user)
-                .then(function (res) {
-                    if (res.data.success) {
-                        Alertify.success(res.data.message);
-                    } else {
-                        console.log(res);
-                        Alertify.error(res.data.c);
-                    }
-                    self.loginTab = true;
-                    self.user = null;
-                }).catch(function (err) {
-                    console.log(err);
-                    Alertify.error(err.data.error.message);
-                });
+                .then(signUpSuccess)
+                .catch(errorHandler);
 
+            function signUpSuccess (res) {
+                Alertify.success(res.data);
+                Alertify.success('Log in, please');
+                self.loginTab = true;
+                self.user = null;
+            }
         }
 
         function cancel () {
             self.user = null;
             self.close();
+        }
+        function errorHandler (err) {
+            console.log(err);
+            Alertify.error(err.data.message);
         }
     }
 }());

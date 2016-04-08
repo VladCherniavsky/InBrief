@@ -27,6 +27,7 @@
 
         function logoutProcess () {
             angular.forEach($cookies.getAll(), function (v, k) {
+                console.log(k)
                 $cookies.remove(k);
             });
             $rootScope.logged = false;

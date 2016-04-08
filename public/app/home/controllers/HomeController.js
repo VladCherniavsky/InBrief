@@ -3,15 +3,12 @@
         .module('InBrief')
         .controller('HomeController', HomeController);
 
-    function HomeController ($rootScope, resolvedUserLinks, Alertify, linkService) {
+    function HomeController (resolvedUserLinks, Alertify, linkService) {
         var self = this;
         self.title = 'My links';
-        self.logged = $rootScope.logged;
         self.addLink = addLink;
         self.userLinks = resolvedUserLinks;
         self.change = change;
-
-
 
         function addLink (link) {
             linkService
@@ -35,7 +32,7 @@
                 .catch(getLinksError);
 
             function getLinksResult (res) {
-                self.userLinks = res.data.links;
+                self.userLinks = res.data;
             }
 
             function getLinksError (err) {

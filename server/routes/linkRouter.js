@@ -7,9 +7,9 @@ var express = require('express'),
 
 router.use(decodeToken,resignToken);
 
-router.get('/home', linkController.getUserLinks);
+router.get('/userLinks', linkController.getUserLinks);
 router.post('/links', checkToken, linkController.addLink);
 router.get('/links', linkController.getAllLinks);
-router.get('/:shortLink', linkController.redirectToLink);
+//router.get('/links/:linkId', linkController.linkDetails);
 
 module.exports = router;

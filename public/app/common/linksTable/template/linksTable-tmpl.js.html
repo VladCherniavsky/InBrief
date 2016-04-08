@@ -1,4 +1,4 @@
-<span> {{linksTableCtrl.title}}: {{linksTableCtrl.links.length}}</span>
+<span> {{linksTableCtrl.title}}</span>
 <table class="table">
     <thead>
     <tr>
@@ -11,7 +11,7 @@
     <tr ng-repeat="link in linksTableCtrl.links">
         <td><a href="{{$root.host}}/{{link.shortLink}}">{{$root.host}}/{{link.shortLink}}</a> </td>
         <td> {{link.clicks}} </td>
-        <td> details </td>
+        <td> <input type="button" value="Details" class="btn btn-info"/> </td>
     </tr>
     </tbody>
 </table>

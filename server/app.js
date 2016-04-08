@@ -5,12 +5,14 @@ var express     = require('express'),
     morgan      = require('morgan'),
     favicon = require('serve-favicon'),
     db = require('./libs/mongoose'),
-    favicon = require('serve-favicon');
+    favicon = require('serve-favicon'),
     config = require('./config');
 
 var userRouter = require('./routes/userRouter.js'),
     redirectRouter = require('./routes/redirectRouter'),
     linkRouter = require('./routes/linkRouter.js');
+
+var port = process.env.PORT || config.get('port');
 
 var app = express();
 app.use(bodyParser.urlencoded({extended:false}));
@@ -27,12 +29,10 @@ app.use('/api', linkRouter);
 
 app.use(function(err, req, res, next) {
     console.log('app.err', err);
-    return res.status(err.status ? err.status : 400).json({success:false, error: err});
+    return res.status(err.status ? err.status : 500).json(err);
 });
 
-var port = process.env.PORT || config.get('port');
 app.listen(port, function() {
-    'use strict';
     console.log('server is running on port ' + port);
 });
 

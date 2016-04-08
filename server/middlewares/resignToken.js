@@ -8,9 +8,9 @@ module.exports = function (req, res, next) {
             userName: req.decoded.userName,
             id: req.decoded.id
         };
-        var token = jwtToken.generateToken(userInfo, config.get('key'),config.get('expirationPeriod'));
-        //req.token = token;
-        req.user = userInfo;
+        var token = jwtToken.generateToken(userInfo, config.get('key'), config.get('expirationPeriod'));
+        res.setHeader('userName', req.decoded.userName);
+        res.setHeader('id', req.decoded.id);
         res.setHeader('x-access-token', token);
         next();
     } else {

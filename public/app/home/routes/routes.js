@@ -17,12 +17,13 @@
                 }
             });
 
-        function getUserLinks (linkService, Alertify) {
+        function getUserLinks (linkService, Alertify, $rootScope) {
             return linkService
                 .getUserLinks()
                 .then(function (res) {
-                    console.log('res.data.links', res.data.links);
-                    return res.data.links;
+                    $rootScope.showMyLinks = true;
+                    console.log('res.data.links', res.data);
+                    return res.data;
                 })
                 .catch(function (err) {
                     Alertify.error('Error getting links');

@@ -4,6 +4,7 @@
         .config(config);
 
     function config ($stateProvider) {
+        console.log('$stateProvider', $stateProvider);
         $stateProvider
             .state('links', {
                 url: '/links',
@@ -13,13 +14,22 @@
                 resolve: {
                     resolvedLinks: getLinks
                 }
+            })
+            .state('details', {
+                url: '/details',
+                templateUrl: 'links/views/linkDetails.html',
+                controller: 'LinkDetailsController',
+                controllerAs: 'linkDetails'
             });
 
         function getLinks (linkService, Alertify) {
             return linkService
                 .getLinks()
                 .then(function (res) {
-                    return res.data.links;
+                    return {
+                        links: res.data.links,
+                        count: res.data.count
+                    };
                 })
                 .catch(function (err) {
                     Alertify.error('Error getting links');

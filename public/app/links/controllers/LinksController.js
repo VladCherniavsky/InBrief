@@ -5,7 +5,7 @@
 
     function LinksController (linkService, resolvedLinks) {
         var self = this;
-        self.links = resolvedLinks;
-        self.title = 'All links';
+        self.title = 'All links: ' + resolvedLinks.count;
+        self.links = resolvedLinks.links;
     }
 }());

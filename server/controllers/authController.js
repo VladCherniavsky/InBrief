@@ -15,40 +15,41 @@ function signup (req, res, next) {
     });
 
     user.save()
-        .then(successFunction)
+        .then(successSignup)
         .catch(next);
 
-    function successFunction (user) {
-        res.json({
-            success: true,
-            message: 'User is registered',
-            user: user
-        });
+    function successSignup(user) {
+        res.json('User is registered');
     }
 }
 
 function login (req, res, next) {
     User
         .findOne({email: req.body.email})
-        .then(success)
+        .then(successLogin)
         .catch(next);
 
-    function success (user) {
+    function successLogin (user) {
         console.log('login request', user);
+        var error;
         if (!user) {
-            res.json({success: false, message: 'Authentication failed. User not found'});
+            error = new Error ('Authentication failed. User not found with this email');
+            error.status = 404;
+            next(error);
         } else if (!crypto.comparePassword(req.body.password, user.password)) {
-            res.json({success: false, message: 'Authentication failed. Wrong password'});
+            error = new Error ('Authentication failed. Wrong password');
+            error.status = 404;
+            next(error);
         } else {
-            var userShortInfo = {
-                id: user._id,
-                userName: user.userName
+            var userInfo = {
+                userName: user.userName,
+                id: user._id
             };
-
-            var token = jwtToken.generateToken(userShortInfo, config.get('key'),config.get('expirationPeriod'));
+            var token = jwtToken.generateToken(userInfo, config.get('key'),config.get('expirationPeriod'));
+            res.setHeader('userName', user.userName);
+            res.setHeader('id', user._id);
             res.setHeader('x-access-token', token);
-            res.json({success: true, message: 'Loged in',  user: userShortInfo});
+            res.json('You are logged in');
         }
-
     }
 }
