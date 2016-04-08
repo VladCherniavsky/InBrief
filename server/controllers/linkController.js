@@ -7,7 +7,7 @@ exports.addLink = addLink;
 exports.getUserLinks = getUserLinks;
 exports.getAllLinks = getAllLinks;
 exports.redirectToLink = redirectToLink;
-exports.linkDetails = linkDetails;
+exports.getLinkById = getLinkById;
 
 function addLink (req, res, next) {
 
@@ -71,6 +71,27 @@ function redirectToLink (req, res, next) {
         .catch(next);
 
 }
-function linkDetails (req, res, next) {
+function getLinkById (req, res, next) {
+    Link
+        .findOne({_id: req.params.linkId})
+        .then(function (link) {
+            Link.aggregate({ $match: {
+                    $and: [
+                        { userId: link.userId }
+                    ]
+                } },
+                { $group: { _id : null, sum : { $sum: "$clicks" } } }, function (err, result) {
+                    if (err) {
+                        next(err);
+                    } else {
+                        console.log('sum', result);
+                        res.json({link: link, sum: result[0].sum });
+                    }
+
+                });
+
+
+        })
+        .catch(next);
 
 }

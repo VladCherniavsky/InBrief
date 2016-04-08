@@ -1,0 +1,33 @@
+<!--{{linkDetailsCtrl.title}}
+
+<h1>{{linkDetailsCtrl.linkDetails.shortLink}}</h1>-->
+<div class="modal-header">
+    <h3 class="modal-title">{{linkDetailsCtrl.title}}</h3>
+</div>
+<div class="modal-body">
+    <dl class="dl-horizontal">
+        <dt>Original link: </dt>
+        <dd>
+            <a href="{{linkDetailsCtrl.link.originalLink}}">
+                <span>{{linkDetailsCtrl.link.originalLink}}</span>
+            </a>
+        </dd>
+        <dt>Short link: </dt>
+        <dd><a href="{{linkDetailsCtrl.link.originalLink}}">{{linkDetailsCtrl.link.shortLink}}</a></dd>
+        <dt>Tags: </dt>
+        <dd>
+            <span ng-repeat="tag in linkDetailsCtrl.link.tags">
+                <a href="tag">{{tag}}</a>&nbsp; &nbsp;
+            </span>
+        </dd>
+        <dt> Number of clicks: </dt>
+        <dd> {{linkDetailsCtrl.link.clicks}} </dd>
+        <dt> Sum of  your clicks: </dt>
+        <dd> {{linkDetailsCtrl.sum}} </dd>
+
+    </dl>
+</div>
+<div class="modal-footer">
+    <input  type="submit" value="Edit"  class="btn btn-default"/>
+
+</div>

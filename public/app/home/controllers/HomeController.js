@@ -3,12 +3,13 @@
         .module('InBrief')
         .controller('HomeController', HomeController);
 
-    function HomeController (resolvedUserLinks, Alertify, linkService) {
+    function HomeController (resolvedUserLinks, Alertify, linkService, $rootScope) {
         var self = this;
         self.title = 'My links';
         self.addLink = addLink;
         self.userLinks = resolvedUserLinks;
         self.change = change;
+        $rootScope.$on('logout', clean);
 
         function addLink (link) {
             linkService
@@ -32,6 +33,7 @@
                 .catch(getLinksError);
 
             function getLinksResult (res) {
+
                 self.userLinks = res.data;
             }
 
@@ -39,5 +41,10 @@
                 Alertify.error(err.data.message);
             }
         }
+        function clean () {
+            self.userLinks = null;
+        }
+
+
     }
 }());

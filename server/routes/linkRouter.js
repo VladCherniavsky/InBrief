@@ -10,6 +10,6 @@ router.use(decodeToken,resignToken);
 router.get('/userLinks', linkController.getUserLinks);
 router.post('/links', checkToken, linkController.addLink);
 router.get('/links', linkController.getAllLinks);
-//router.get('/links/:linkId', linkController.linkDetails);
+router.get('/links/:linkId', linkController.getLinkById);
 
 module.exports = router;

@@ -21,10 +21,6 @@ var user = new Schema({
     password: {
         type: String,
         required: true
-    },
-    linkIds: {
-        type: [Schema.Types.ObjectId],
-        ref: 'Link'
     }
 });
 

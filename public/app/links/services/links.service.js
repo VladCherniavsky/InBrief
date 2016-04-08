@@ -8,8 +8,9 @@
         self.getLinks = getLinks;
         self.addLink = addLink;
         self.getUserLinks = getUserLinks;
+        self.getLinkById = getLinkById;
 
-        function getLinks (user) {
+        function getLinks () {
             return $http({
                 method: 'GET',
                 url: 'api/links'
@@ -28,6 +29,14 @@
             return $http({
                 method: 'GET',
                 url: 'api/userLinks'
+            });
+        }
+        function getLinkById (linkId) {
+
+            console.log('linkId', linkId);
+            return $http({
+                method: 'GET',
+                url: 'api/links/' + linkId
             });
         }
 

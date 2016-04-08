@@ -7,12 +7,18 @@
         var self = this;
         self.getModal = getModal;
 
-        function getModal (animationsEnabled, pathToTmpl, controller, controllerAs) {
+        function getModal (animationsEnabled, pathToTmpl, controller, controllerAs, data) {
             return $uibModal.open({
                 animation: animationsEnabled,
                 templateUrl: pathToTmpl,
                 controller: controller,
-                controllerAs: controllerAs
+                controllerAs: controllerAs,
+                resolve: {
+                    data: function () {
+                        return data;
+                    }
+                }
+
             });
         }
     }
