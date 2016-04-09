@@ -3,13 +3,12 @@
         .module('InBrief')
         .controller('HomeController', HomeController);
 
-    function HomeController (resolvedUserLinks, Alertify, linkService, $rootScope) {
+    function HomeController (resolvedUserLinks, Alertify, linkService, commonService, $timeout, $scope) {
         var self = this;
-        self.title = 'My links';
+        self.title = getTitle(resolvedUserLinks.count);
         self.addLink = addLink;
-        self.userLinks = resolvedUserLinks;
+        self.userLinks = resolvedUserLinks.links;
         self.change = change;
-        $rootScope.$on('logout', clean);
 
         function addLink (link) {
             linkService
@@ -20,7 +19,7 @@
             function addLinkResult (res) {
                 self.link = null;
                 self.change();
-                Alertify.success(res.data.message);
+                Alertify.success(res.data);
             }
             function addLinkError (err) {
                 Alertify.error(err.data.message);
@@ -33,18 +32,17 @@
                 .catch(getLinksError);
 
             function getLinksResult (res) {
-
-                self.userLinks = res.data;
+                console.log(res.data);
+                self.userLinks = commonService.checkEdit(res.data.links);
+                getTitle(res.data.count);
             }
-
             function getLinksError (err) {
                 Alertify.error(err.data.message);
             }
         }
-        function clean () {
-            self.userLinks = null;
+        function getTitle (count) {
+            self.title = 'My links:' + count;
+            return self.title;
         }
-
-
     }
 }());

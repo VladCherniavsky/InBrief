@@ -8,6 +8,8 @@ exports.getUserLinks = getUserLinks;
 exports.getAllLinks = getAllLinks;
 exports.redirectToLink = redirectToLink;
 exports.getLinkById = getLinkById;
+exports.updateLink = updateLink;
+exports.deleteLink = deleteLink;
 
 function addLink (req, res, next) {
 
@@ -15,7 +17,8 @@ function addLink (req, res, next) {
         originalLink: req.body.orginalLink,
         shortLink: faker.internet.password(),
         userId: req.decoded.id ? req.decoded.id : req.cookies.id,
-        tags: req.body.tags
+        tags: req.body.tags,
+        description: req.body.description
     });
 
     link.save()
@@ -29,26 +32,33 @@ function addLink (req, res, next) {
 
 function getUserLinks (req, res, next) {
     if (req.decoded) {
-        Link
-            .find({userId: req.decoded.id}, {shortLink: 1, clicks: 1})
-            .then(function (userLinks) {
-                console.log(userLinks);
-                res.json(userLinks);
-            })
-            .catch(next);
-    } else {
-        res.json('You dont have links');
+        Link.count({userId: req.decoded.id})
+            .then(function (count) {
+                return Link
+                    .find({userId: req.decoded.id})
+                    .then(allLinks)
+                    .catch(next);
+
+                function allLinks (links) {
+                    console.log('links', links);
+                    console.log('count', count);
+                    res.json({links: links, count: count});
+                }
+            });
+    }
+    else {
+        res.end();
     }
 }
 function getAllLinks (req, res, next) {
     console.log('getAllLinks');
-    var select = {shortLink: 1, clicks: 1, _id: 1};
-    var skipLimit = {skip: 5, limit: 10};
+    var select = {shortLink: 1, clicks: 1, _id: 1, userId: 1};
+    var skipLimit = {skip: 0, limit: 10};
 
     Link.count({})
         .then(function (count) {
             return Link
-                .find({}, select, skipLimit)
+                .find({}, select)
                 .then(allLinks)
                 .catch(next);
 
@@ -72,25 +82,47 @@ function redirectToLink (req, res, next) {
 
 }
 function getLinkById (req, res, next) {
+    var select = {shortLink: 1, clicks: 1, _id: 1, userId: 1, description: 1};
     Link
         .findOne({_id: req.params.linkId})
         .then(function (link) {
-            Link.aggregate({ $match: {
+            console.log('LINK', link);
+            Link.aggregate({$match: {
                     $and: [
-                        { userId: link.userId }
+                        {userId: link.userId}
                     ]
-                } },
-                { $group: { _id : null, sum : { $sum: "$clicks" } } }, function (err, result) {
+                }},
+                {$group: {_id : null, sum : {$sum: '$clicks'}}}, function (err, result) {
                     if (err) {
                         next(err);
                     } else {
                         console.log('sum', result);
-                        res.json({link: link, sum: result[0].sum });
+                        res.json({link: link, sum: result[0].sum});
                     }
-
                 });
-
-
+        })
+        .catch(next);
+}
+function updateLink (req, res, next) {
+    console.log('update', req.body);
+    Link
+        .findOneAndUpdate({_id: req.body._id}, {$set: {
+            tags: req.body.tags,
+            description: req.body.description,
+            originalLink: req.body.originalLink
+        }})
+        .then(function (link) {
+            res.json('Link is updated');
+        })
+        .catch(next);
+}
+function deleteLink (req, res, next) {
+    console.log('req.params', req);
+    Link
+        .remove({_id: req.params.linkId})
+        .then(function (data) {
+            console.log('data', data);
+            res.end();
         })
         .catch(next);
 

@@ -3,18 +3,27 @@
         .module('InBrief')
         .factory('authIntercepor', authIntercepor);
 
-    function authIntercepor ($cookies, $rootScope) {
+    function authIntercepor ($rootScope, $window) {
         var authIntercepor = {
+            request: function (config) {
+                config.headers['x-access-token'] = $window.localStorage.token;
+                $rootScope.$on('logout', function () {
+                    config.headers['x-access-token'] = null;
+                });
+
+                return config;
+            },
             response: function(response) {
                 var token = response.headers('x-access-token'),
                     id = response.headers('id'),
                     userName = response.headers('userName');
-
-                if (token !== null) {
-                    $cookies.put('token', token);
-                    if (id) { $cookies.put('id', id); }
-                    if (userName) { $cookies.put('userName', userName); }
-                    $rootScope.$broadcast('logged');
+                if ($rootScope.canLogin) {
+                    if (token !== null) {
+                        $window.localStorage.token = token;
+                        if (id) { $window.localStorage.id = id; }
+                        if (userName) { $window.localStorage.userName = userName; }
+                        $rootScope.$broadcast('logged');
+                    }
                 }
                 return response;
             }

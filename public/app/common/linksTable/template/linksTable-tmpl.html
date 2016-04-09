@@ -1,0 +1,33 @@
+<span> {{linksTableCtrl.title}}</span>
+<table class="table">
+    <thead>
+    <tr>
+        <th> Short link </th>
+        <th> Clicks </th>
+        <th> Actions </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="link in linksTableCtrl.links track by $index">
+        <td><a href="{{$root.host}}/{{link.shortLink}}">{{$root.host}}/{{link.shortLink}}</a> </td>
+        <td> {{link.clicks}} </td>
+        <td>
+            <input type="button"
+                   ng-click="linksTableCtrl.linkDetails(link._id)"
+                   value="Details"
+                   class="btn btn-info"/>
+            <input type="button"
+                   ng-click="linksTableCtrl.editLink(link._id)"
+                   ng-if="link.editable"
+                   value="Edit"
+                   class="btn btn-warning"/>
+            <input type="button"
+                   ng-if="link.editable"
+                   ng-click="linksTableCtrl.deleteLink(link._id)"
+                   value="Delete"
+                   class="btn btn-danger"/>
+        </td>
+        {{link.userId}}
+    </tr>
+    </tbody>
+</table>

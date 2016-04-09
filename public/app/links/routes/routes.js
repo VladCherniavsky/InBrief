@@ -20,16 +20,40 @@
                 templateUrl: 'links/views/linkDetails.html',
                 controller: 'LinkDetailsController',
                 controllerAs: 'linkDetails'
+            })
+            .state('edit', {
+                url: '/edit/:linkId',
+                templateUrl: 'links/views/editLink.html',
+                controller: 'EditLinkController',
+                controllerAs: 'editLink',
+                resolve: {
+                    resolvedLink: getLink
+                }
             });
 
-        function getLinks (linkService, Alertify) {
+        function getLinks (linkService, Alertify, commonService) {
             return linkService
                 .getLinks()
                 .then(function (res) {
                     return {
-                        links: res.data.links,
+                        links: commonService.checkEdit(res.data.links),
                         count: res.data.count
                     };
+                })
+                .catch(function (err) {
+                    Alertify.error('Error getting links');
+                });
+        }
+        function getLink (linkService, $stateParams) {
+            return linkService
+                .getLinkById($stateParams.linkId)
+                .then(function (res) {
+                    console.log(res);
+                    var link = {
+                        originalLink: [res.data.link.originalLink],
+
+                    };
+                    return res.data.link;
                 })
                 .catch(function (err) {
                     Alertify.error('Error getting links');

@@ -3,7 +3,7 @@
         .module('InBrief')
         .controller('AuthFormController', AuthFormController);
 
-    function AuthFormController (authService, Alertify, $state) {
+    function AuthFormController (authService, Alertify, $state, $rootScope) {
         var self = this;
         self.loginTab = true;
         self.login = login;
@@ -12,6 +12,7 @@
 
         function login (user) {
             console.log('user', user);
+            $rootScope.canLogin = true;
             authService
                 .loginUser(user)
                 .then(loginSuccess)
@@ -42,8 +43,15 @@
             self.close();
         }
         function errorHandler (err) {
-            console.log(err);
-            Alertify.error(err.data.message);
+            if (err.data.errors) {
+                for (var key in err.data.errors) {
+                    if (!err.data.errors.hasOwnProperty(key)) { continue }
+                    Alertify.error(err.data.errors[key].message);
+
+                }
+            } else {
+                Alertify.error(err.data.message);
+            }
         }
     }
 }());

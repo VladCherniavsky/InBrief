@@ -12,25 +12,24 @@
     function config ($httpProvider) {
         $httpProvider.interceptors.push('authIntercepor');
     }
-    function runBlock ($rootScope, $cookies, authService, hostService) {
-        $rootScope.logged = false;
+    function runBlock ($rootScope, $window, authService, commonService) {
         $rootScope.$on('logged', loggedProcess);
         $rootScope.$on('logout', logoutProcess);
-        $rootScope.host = hostService.getHost();
-        console.log('hostService.getHost()', hostService.getHost());
+        $rootScope.host = commonService.getHost();
 
-        authService.defaultRequest();
-
+        if ($window.localStorage.token) {
+            authService.defaultRequest();
+            $rootScope.canLogin = true;
+        }
         function loggedProcess () {
             $rootScope.logged = true;
         }
 
         function logoutProcess () {
-            angular.forEach($cookies.getAll(), function (v, k) {
-                console.log(k)
-                $cookies.remove(k);
-            });
+            $window.localStorage.clear();;
             $rootScope.logged = false;
+            $rootScope.canLogin = false;
+
         }
     }
 }());

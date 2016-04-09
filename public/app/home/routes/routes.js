@@ -17,12 +17,11 @@
                 }
             });
 
-        function getUserLinks (linkService, Alertify, $rootScope) {
+        function getUserLinks (linkService, Alertify, commonService) {
             return linkService
                 .getUserLinks()
                 .then(function (res) {
-                    $rootScope.showMyLinks = true;
-                    console.log('res.data.links', res.data);
+                    commonService.checkEdit(res.data.links)
                     return res.data;
                 })
                 .catch(function (err) {

@@ -33,12 +33,13 @@ function login (req, res, next) {
         console.log('login request', user);
         var error;
         if (!user) {
-            error = new Error ('Authentication failed. User not found with this email');
+            error = new Error ();
+            error.message = 'Authentication failed. User not found with this email';
             error.status = 404;
             next(error);
         } else if (!crypto.comparePassword(req.body.password, user.password)) {
-            error = new Error ('Authentication failed. Wrong password');
-            error.status = 404;
+            error = new Error ();
+            error.message = 'Authentication failed. Wrong password';
             next(error);
         } else {
             var userInfo = {

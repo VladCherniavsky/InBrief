@@ -11,5 +11,7 @@ router.get('/userLinks', linkController.getUserLinks);
 router.post('/links', checkToken, linkController.addLink);
 router.get('/links', linkController.getAllLinks);
 router.get('/links/:linkId', linkController.getLinkById);
+router.put('/links', linkController.updateLink);
+router.delete('/links/:linkId', linkController.deleteLink);
 
 module.exports = router;
