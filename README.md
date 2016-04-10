@@ -12,4 +12,5 @@ To start application on your local machine:
 
 NOTE:
 If you will have error in browser console with 'alertify.js' - try to fix it by running 'gulp fix:alertify'
+
 If you will have other errors - run 'gulp build' then 'gulp start'
