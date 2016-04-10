@@ -139,7 +139,7 @@ gulp.task('fix:alertify', function () {
     return gulp.src(dirs.bower + '/ng-alertify/dist/**.*js')
         .pipe(gulp.dest(dirs.bower + '/ng-alertify/'));
 });
-gulp.task('start', ['build'], function () {
+gulp.task('start', function () {
     var options = {
         script: 'app.js',
         delaytime: 1,

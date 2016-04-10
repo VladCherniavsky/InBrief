@@ -4,7 +4,6 @@
         .config(config);
 
     function config ($stateProvider) {
-        console.log('$stateProvider', $stateProvider);
         $stateProvider
             .state('links', {
                 url: '/links',
