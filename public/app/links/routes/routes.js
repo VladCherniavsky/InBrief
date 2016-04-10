@@ -39,7 +39,6 @@
                 });
         }
         function getLinkByTag ($stateParams, commonService, Alertify, linkService) {
-            console.log('$stateparams', $stateParams.tag);
             return linkService
                 .getLinkByTag($stateParams.tag, commonService.getPaginationSet())
                 .then(function (res) {
@@ -51,9 +50,6 @@
                 .catch(function (err) {
                     Alertify.error('Error getting links');
                 });
-
         }
-
-
     }
 } ());

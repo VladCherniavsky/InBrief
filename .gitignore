@@ -29,3 +29,4 @@ node_modules
 .idea
 ../.idea
 public/bower_components
+_build

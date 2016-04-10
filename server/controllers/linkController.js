@@ -1,5 +1,6 @@
 var Link = require('../models/link'),
     config = require('../config'),
+    _ = require('lodash'),
     faker = require('faker');
 
 exports.addLink = addLink;
@@ -96,11 +97,7 @@ function getLinkById (req, res, next) {
 }
 function updateLink (req, res, next) {
     Link
-        .findOneAndUpdate({_id: req.body._id}, {$set: {
-            tags: req.body.tags,
-            description: req.body.description,
-            originalLink: req.body.originalLink
-        }})
+        .findOneAndUpdate({_id: req.body._id}, {$set: _.pick(req.body, ['tags', 'description', 'originalLink'])})
         .then(function () {
             res.end();
         })

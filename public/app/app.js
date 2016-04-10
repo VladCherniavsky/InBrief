@@ -27,7 +27,7 @@
         }
 
         function logoutProcess () {
-            $window.localStorage.clear();;
+            $window.localStorage.clear();
             $rootScope.logged = false;
             $rootScope.canLogin = false;
 

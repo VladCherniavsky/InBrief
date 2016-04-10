@@ -19,7 +19,7 @@
                     Alertify.success('Link updated successfully');
                     close();
                 })
-                .catch(function () {
+                .catch(function (err) {
                     Alertify.error(err.data.message);
                 });
         }

@@ -14,7 +14,7 @@
         }
         function checkEdit (links) {
             angular.forEach(links, function(value, key) {
-                value.editable = $window.localStorage.id == value.userId && $rootScope.logged;
+                value.editable = $window.localStorage.id === value.userId && $rootScope.logged;
             });
             return links;
 
@@ -22,12 +22,12 @@
         function getPaginationSet (page, perPage) {
             var defaultSet = {
                 page: page ? page : 1,
-                perPage: perPage ? perPage : 2
+                perPage: perPage ? perPage : 5
             };
             return {
                 skip: (defaultSet.page - 1) * defaultSet.perPage,
                 limit: defaultSet.perPage
-            }
+            };
 
         }
     }

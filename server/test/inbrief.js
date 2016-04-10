@@ -17,7 +17,7 @@ describe('authentication to service', function () {
                 })
                 .expect(200)
                 .end(function(err, res) {
-                    if (err) { return done(err) }
+                    if (err) { return done(err); }
                     done();
                 });
 
@@ -34,7 +34,7 @@ describe('authentication to service', function () {
                 .expect(200)
                 .end(function(err, res) {
 
-                    if (err) { return done(err) }
+                    if (err) { return done(err); }
                     expect(res.header.id).to.equal('570a642e89db7c3c08a68eb5');
                     done();
                 });
@@ -49,7 +49,7 @@ describe('get links', function () {
                 .get('/api/links')
                 .expect(200)
                 .end(function(err, res) {
-                    if (err) { return done(err) }
+                    if (err) { return done(err); }
                     done();
                 });
         });

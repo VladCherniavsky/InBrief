@@ -45,7 +45,7 @@
         function errorHandler (err) {
             if (err.data.errors) {
                 for (var key in err.data.errors) {
-                    if (!err.data.errors.hasOwnProperty(key)) { continue }
+                    if (!err.data.errors.hasOwnProperty(key)) { continue; }
                     Alertify.error(err.data.errors[key].message);
 
                 }

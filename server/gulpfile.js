@@ -135,6 +135,20 @@ gulp.task('index', function() {
 gulp.task('build',['index', 'favicon', 'templates', 'js:bower', 'js:debug', 'css:compile'], function () {
     gulp.start('inject');
 });
+gulp.task('fix:alertify', function () {
+    return gulp.src(dirs.bower + '/ng-alertify/dist/**.*js')
+        .pipe(gulp.dest(dirs.bower + '/ng-alertify/'));
+});
+gulp.task('start', ['build'], function () {
+    var options = {
+        script: 'app.js',
+        delaytime: 1,
+        env: {
+            'PORT': 3000
+        }
+    };
+    return nodemon(options);
+});
 
 function executeTask(name) {
     return function() {

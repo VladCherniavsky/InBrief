@@ -23,8 +23,8 @@
         </dd>
         <dt> Number of clicks: </dt>
         <dd> {{linkDetails.link.clicks}} </dd>
-        <dt> Sum of  your clicks: </dt>
-        <dd> {{linkDetails.sum}} </dd>
+        <dt ng-if="$root.logged"> Sum of  your clicks: </dt>
+        <dd ng-if="$root.logged"> {{linkDetails.sum}} </dd>
     </dl>
 
 </div>

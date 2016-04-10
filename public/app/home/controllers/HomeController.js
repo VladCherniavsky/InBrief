@@ -6,7 +6,7 @@
     function HomeController (resolvedUserLinks, Alertify, linkService, commonService) {
         var self = this;
         self.currentPage = 1;
-        self.itemsPerPage = 2;
+        self.itemsPerPage = 5;
         self.count = resolvedUserLinks.count;
         self.title = getTitle(resolvedUserLinks.count);
         self.addLink = addLink;

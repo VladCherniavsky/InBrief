@@ -9,7 +9,7 @@
         self.links = resolvedByTag.links;
         self.count = resolvedByTag.count;
         self.currentPage = 1;
-        self.itemsPerPage = 2;
+        self.itemsPerPage = 5;
         self.pageChanged = pageChanged;
 
         function pageChanged () {
@@ -21,7 +21,7 @@
             function getLinksSuccess (res) {
                 self.links = res.data.links;
             }
-            function getLinksError () {
+            function getLinksError (err) {
                 Alertify.error(err.data.message);
             }
         }
