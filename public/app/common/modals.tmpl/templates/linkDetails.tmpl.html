@@ -10,7 +10,9 @@
             </a>
         </dd>
         <dt>Short link: </dt>
-        <dd><a  href="{{linkDetails.link.originalLink}}">{{linkDetails.link.shortLink}}</a></dd>
+        <dd>
+            <a href="{{$root.host}}/{{linkDetails.link.shortLink}}">{{$root.host}}/{{linkDetails.link.shortLink}}</a>
+        </dd>
         <dt>Description: </dt>
         <dd>{{linkDetails.link.description}}</dd>
         <dt>Tags: </dt>
