@@ -1,13 +1,14 @@
 (function () {
     angular
         .module('InBrief')
-        .controller('LinksController', LinksController);
+        .controller('LinksByTagController', LinksByTagController);
 
-    function LinksController (linkService, resolvedLinks, Alertify, commonService) {
+    function LinksByTagController (linkService, Alertify, commonService, resolvedByTag, $stateParams) {
+        console.log('getLinkByTag',resolvedByTag);
         var self = this;
-        self.title = 'All links: ' + resolvedLinks.count;
-        self.links = resolvedLinks.links;
-        self.count = resolvedLinks.count;
+        self.title = 'We have ' + resolvedByTag.count + ' links with tag: ' + $stateParams.tag;
+        self.links = resolvedByTag.links;
+        self.count = resolvedByTag.count;
         self.currentPage = 1;
         self.itemsPerPage = 2;
         self.pageChanged = pageChanged;

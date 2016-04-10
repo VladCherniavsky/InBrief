@@ -3,14 +3,13 @@
         .module('InBrief')
         .controller('LinksTableController', LinksTableController);
 
-    function LinksTableController (modalService, linkService, Alertify, $state) {
+    function LinksTableController (modalService, linkService, Alertify) {
         var self = this;
         self.linkDetails = linkDetails;
         self.editLink = editLink;
         self.deleteLink = deleteLink;
 
         function linkDetails (linkId) {
-            console.log('linkId', linkId);
             linkService
                 .getLinkById(linkId)
                 .then(getlinkDetailsSuccess)
@@ -29,18 +28,15 @@
             }
         }
 
-        function editLink (linkId) {
-            $state.go('edit', {linkId: linkId});
+        function editLink (link) {
+            var modalInstance = modalService.getModal(true,
+                'common/modals.tmpl/templates/linkEdit.tmpl.html',
+                'LinkEditController',
+                'linkEdit',
+                link);
         }
         function deleteLink (linkId) {
-            linkService.deleteLink(linkId)
-                .then(function () {
-                    Alertify.success('Link is deleted successfully');
-                })
-                .catch(function (err) {
-                    Alertify.error(err.data.message);
-                });
-
+            self.delete({linkId: linkId});
         }
 
     }

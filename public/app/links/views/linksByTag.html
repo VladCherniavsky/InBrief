@@ -2,17 +2,17 @@
     <div class="jumbotron">
         <div class="table-responsive">
             <links-table
-                    links = linksCtrl.links
-                    title = linksCtrl.title>
+                    links = linksByTag.links
+                    title = linksByTag.title>
             </links-table>
         </div>
         <uib-pagination
-                total-items="linksCtrl.count"
-                ng-model="linksCtrl.currentPage"
+                total-items="linksByTag.count"
+                ng-model="linksByTag.currentPage"
                 max-size="3"
-                ng-change="linksCtrl.pageChanged()"
+                ng-change="linksByTag.pageChanged()"
                 rotate="true"
-                items-per-page="linksCtrl.itemsPerPage"
+                items-per-page="linksByTag.itemsPerPage"
                 boundary-link-numbers="true">
         </uib-pagination>
     </div>

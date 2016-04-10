@@ -19,9 +19,9 @@
 
         function getUserLinks (linkService, Alertify, commonService) {
             return linkService
-                .getUserLinks()
+                .getUserLinks(commonService.getPaginationSet())
                 .then(function (res) {
-                    commonService.checkEdit(res.data.links)
+                    commonService.checkEdit(res.data.links);
                     return res.data;
                 })
                 .catch(function (err) {

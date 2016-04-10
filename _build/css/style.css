@@ -252,3 +252,9 @@ a:hover {
 
 .right {
   float: right; }
+
+a.tag-link:hover {
+  cursor: pointer; }
+
+.set-overflow {
+  overflow: hidden !important; }

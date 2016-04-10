@@ -1,4 +1,6 @@
-<span> {{linksTableCtrl.title}}</span>
+<header>
+    <h3> {{linksTableCtrl.title}} </h3>
+</header>
 <table class="table">
     <thead>
     <tr>
@@ -17,7 +19,7 @@
                    value="Details"
                    class="btn btn-info"/>
             <input type="button"
-                   ng-click="linksTableCtrl.editLink(link._id)"
+                   ng-click="linksTableCtrl.editLink(link)"
                    ng-if="link.editable"
                    value="Edit"
                    class="btn btn-warning"/>

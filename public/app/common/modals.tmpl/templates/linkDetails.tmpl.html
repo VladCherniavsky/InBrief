@@ -4,19 +4,19 @@
 <div class="modal-body">
     <dl class="dl-horizontal">
         <dt>Original link: </dt>
-        <dd>
+        <dd class="set-overflow">
             <a href="{{linkDetails.link.originalLink}}">
-                <span>{{linkDetails.link.originalLink}}</span>
+                {{linkDetails.link.originalLink}}
             </a>
         </dd>
         <dt>Short link: </dt>
-        <dd><a href="{{linkDetails.link.originalLink}}">{{linkDetails.link.shortLink}}</a></dd>
+        <dd><a  href="{{linkDetails.link.originalLink}}">{{linkDetails.link.shortLink}}</a></dd>
         <dt>Description: </dt>
         <dd>{{linkDetails.link.description}}</dd>
         <dt>Tags: </dt>
         <dd>
             <span ng-repeat="tag in linkDetails.link.tags">
-                <a href="tag">{{tag}}</a>&nbsp; &nbsp;
+                <a class="tag-link" ng-click="linkDetails.getLinksByTag(tag)">{{tag}}</a>&nbsp; &nbsp;
             </span>
         </dd>
         <dt> Number of clicks: </dt>
@@ -27,6 +27,5 @@
 
 </div>
 <div class="modal-footer">
-    <input  type="button" class="btn btn-default" ng-click="linkDetails.edit()" value="Edit" />
     <input  type="button" class="btn btn-default" ng-click="linkDetails.close()" value="cancel" />
 </div>

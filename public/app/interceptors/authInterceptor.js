@@ -3,7 +3,7 @@
         .module('InBrief')
         .factory('authIntercepor', authIntercepor);
 
-    function authIntercepor ($rootScope, $window) {
+    function authIntercepor ($rootScope, $window, $cookies) {
         var authIntercepor = {
             request: function (config) {
                 config.headers['x-access-token'] = $window.localStorage.token;
@@ -19,6 +19,7 @@
                     userName = response.headers('userName');
                 if ($rootScope.canLogin) {
                     if (token !== null) {
+                        $cookies.put('id', id);
                         $window.localStorage.token = token;
                         if (id) { $window.localStorage.id = id; }
                         if (userName) { $window.localStorage.userName = userName; }

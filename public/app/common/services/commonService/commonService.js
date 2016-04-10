@@ -7,6 +7,7 @@
         var self = this;
         self.getHost = getHost;
         self.checkEdit = checkEdit;
+        self.getPaginationSet = getPaginationSet;
 
         function getHost () {
             return $location.protocol() + '://' + $location.host() + ':' + $location.port();
@@ -16,6 +17,17 @@
                 value.editable = $window.localStorage.id == value.userId && $rootScope.logged;
             });
             return links;
+
+        }
+        function getPaginationSet (page, perPage) {
+            var defaultSet = {
+                page: page ? page : 1,
+                perPage: perPage ? perPage : 2
+            };
+            return {
+                skip: (defaultSet.page - 1) * defaultSet.perPage,
+                limit: defaultSet.perPage
+            }
 
         }
     }

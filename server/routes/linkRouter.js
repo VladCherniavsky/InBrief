@@ -13,5 +13,6 @@ router.get('/links', linkController.getAllLinks);
 router.get('/links/:linkId', linkController.getLinkById);
 router.put('/links', linkController.updateLink);
 router.delete('/links/:linkId', linkController.deleteLink);
+router.get('/linksByTag/:tag', linkController.getLinkByTag);
 
 module.exports = router;

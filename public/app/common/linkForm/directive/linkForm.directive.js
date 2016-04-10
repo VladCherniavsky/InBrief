@@ -12,7 +12,8 @@
             controllerAs: 'linkFormCtrl',
             bindToController: {
                 action: '&',
-                link: '='
+                link: '=',
+                close: '&'
 
             }
         };

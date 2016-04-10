@@ -11,11 +11,13 @@
         self.getLinkById = getLinkById;
         self.updateLink = updateLink;
         self.deleteLink = deleteLink;
+        self.getLinkByTag = getLinkByTag;
 
-        function getLinks () {
+        function getLinks (paginationSet) {
             return $http({
                 method: 'GET',
-                url: 'api/links'
+                url: 'api/links',
+                params: paginationSet
             });
         }
 
@@ -27,14 +29,14 @@
             });
         }
 
-        function getUserLinks () {
+        function getUserLinks (paginationSet) {
             return $http({
                 method: 'GET',
-                url: 'api/userLinks'
+                url: 'api/userLinks',
+                params: paginationSet
             });
         }
         function getLinkById (linkId) {
-
             console.log('linkId', linkId);
             return $http({
                 method: 'GET',
@@ -54,6 +56,14 @@
             return $http({
                 method: 'DELETE',
                 url: 'api/links/' + linkId
+            });
+        }
+        function getLinkByTag (tag, paginationSet) {
+            console.log('tag', tag);
+            return $http({
+                method: 'GET',
+                url: 'api/linksByTag/' + tag,
+                params: paginationSet
             });
         }
 

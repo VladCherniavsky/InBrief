@@ -15,25 +15,19 @@
                     resolvedLinks: getLinks
                 }
             })
-            .state('details', {
-                url: '/details',
-                templateUrl: 'links/views/linkDetails.html',
-                controller: 'LinkDetailsController',
-                controllerAs: 'linkDetails'
-            })
-            .state('edit', {
-                url: '/edit/:linkId',
-                templateUrl: 'links/views/editLink.html',
-                controller: 'EditLinkController',
-                controllerAs: 'editLink',
+            .state('tag', {
+                url: '/tag/:tag',
+                templateUrl: 'links/views/linksByTag.html',
+                controller: 'LinksByTagController',
+                controllerAs: 'linksByTag',
                 resolve: {
-                    resolvedLink: getLink
+                    resolvedByTag: getLinkByTag
                 }
             });
 
         function getLinks (linkService, Alertify, commonService) {
             return linkService
-                .getLinks()
+                .getLinks(commonService.getPaginationSet())
                 .then(function (res) {
                     return {
                         links: commonService.checkEdit(res.data.links),
@@ -44,21 +38,22 @@
                     Alertify.error('Error getting links');
                 });
         }
-        function getLink (linkService, $stateParams) {
+        function getLinkByTag ($stateParams, commonService, Alertify, linkService) {
+            console.log('$stateparams', $stateParams.tag);
             return linkService
-                .getLinkById($stateParams.linkId)
+                .getLinkByTag($stateParams.tag, commonService.getPaginationSet())
                 .then(function (res) {
-                    console.log(res);
-                    var link = {
-                        originalLink: [res.data.link.originalLink],
-
+                    return {
+                        links: res.data.links,
+                        count: res.data.count
                     };
-                    return res.data.link;
                 })
                 .catch(function (err) {
                     Alertify.error('Error getting links');
                 });
+
         }
+
 
     }
 } ());

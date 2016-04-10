@@ -10,11 +10,13 @@ exports.redirectToLink = redirectToLink;
 exports.getLinkById = getLinkById;
 exports.updateLink = updateLink;
 exports.deleteLink = deleteLink;
+exports.getLinkByTag = getLinkByTag;
 
 function addLink (req, res, next) {
+    console.log('body',req.body);
 
     var link = new Link ({
-        originalLink: req.body.orginalLink,
+        originalLink: req.body.originalLink,
         shortLink: faker.internet.password(),
         userId: req.decoded.id ? req.decoded.id : req.cookies.id,
         tags: req.body.tags,
@@ -26,16 +28,17 @@ function addLink (req, res, next) {
         .catch(next);
 
     function successAddLink (createdLink) {
-        res.json('Link is added');
+        res.end();
     }
 }
 
 function getUserLinks (req, res, next) {
     if (req.decoded) {
+        var skipLimit = {skip: req.query.skip, limit: req.query.limit};
         Link.count({userId: req.decoded.id})
             .then(function (count) {
                 return Link
-                    .find({userId: req.decoded.id})
+                    .find({userId: req.decoded.id}, null, skipLimit)
                     .then(allLinks)
                     .catch(next);
 
@@ -51,14 +54,13 @@ function getUserLinks (req, res, next) {
     }
 }
 function getAllLinks (req, res, next) {
-    console.log('getAllLinks');
-    var select = {shortLink: 1, clicks: 1, _id: 1, userId: 1};
-    var skipLimit = {skip: 0, limit: 10};
+    var skipLimit = {skip: req.query.skip, limit: req.query.limit};
+    var select = {originalLink: 1, shortLink: 1, description: 1, tags: 1, clicks: 1};
 
     Link.count({})
         .then(function (count) {
             return Link
-                .find({}, select)
+                .find({}, select, skipLimit)
                 .then(allLinks)
                 .catch(next);
 
@@ -82,7 +84,6 @@ function redirectToLink (req, res, next) {
 
 }
 function getLinkById (req, res, next) {
-    var select = {shortLink: 1, clicks: 1, _id: 1, userId: 1, description: 1};
     Link
         .findOne({_id: req.params.linkId})
         .then(function (link) {
@@ -112,7 +113,7 @@ function updateLink (req, res, next) {
             originalLink: req.body.originalLink
         }})
         .then(function (link) {
-            res.json('Link is updated');
+            res.end();
         })
         .catch(next);
 }
@@ -126,4 +127,19 @@ function deleteLink (req, res, next) {
         })
         .catch(next);
 
+}
+function getLinkByTag (req, res, next) {
+    Link.count({tags: req.params.tag})
+        .then(function (count) {
+            return Link
+                .find({tags: req.params.tag}, null, null)
+                .then(allLinks)
+                .catch(next);
+
+            function allLinks (links) {
+                console.log('links', links);
+                console.log('count', count);
+                res.json({links: links, count: count});
+            }
+        });
 }

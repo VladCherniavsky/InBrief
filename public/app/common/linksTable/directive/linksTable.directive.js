@@ -13,7 +13,8 @@
             bindToController: {
                 links: '=',
                 details: '&',
-                title: '='
+                title: '=',
+                delete: '&'
             }
         };
     }
