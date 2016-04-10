@@ -3,7 +3,7 @@ InBrief - service which allows you to shorten the  website URL
 
 To start application on your local machine:
 
-1. run  'git clone https://github.com/VladCherniavsky/InBrief.git"
+1. run  'git clone https://github.com/VladCherniavsky/InBrief.git'
 2. go to folder 'public' and run 'bower install'
 3. go to folder 'server' and run 'npm install'
 4. run 'gulp start'
