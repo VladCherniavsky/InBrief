@@ -36,3 +36,5 @@ app.listen(port, function() {
     console.log('server is running on port ' + port);
 });
 
+module.exports = app;
+

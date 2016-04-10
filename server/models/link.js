@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+    validate = require('mongoose-validator'),
     uniqueValidator = require('mongoose-unique-validator');
 
 mongoose.Promise = require('bluebird');
@@ -11,6 +12,7 @@ var link = new Schema({
         unique: 'This link already exists',
         required: true,
         trim: true
+
     },
     shortLink: {
         type: String,
@@ -35,7 +37,6 @@ var link = new Schema({
     clicks: {
         type: Number
     }
-
 });
 
 link.plugin(uniqueValidator);
