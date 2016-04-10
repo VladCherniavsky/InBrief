@@ -36,7 +36,6 @@
                 .catch(getLinksError);
 
             function getLinksResult (res) {
-                console.log(res.data);
                 self.userLinks = commonService.checkEdit(res.data.links);
                 self.count = res.data.count;
                 getTitle(res.data.count);

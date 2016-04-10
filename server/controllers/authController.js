@@ -18,7 +18,7 @@ function signup (req, res, next) {
         .then(successSignup)
         .catch(next);
 
-    function successSignup(user) {
+    function successSignup() {
         res.json('User is registered');
     }
 }
@@ -30,7 +30,6 @@ function login (req, res, next) {
         .catch(next);
 
     function successLogin (user) {
-        console.log('login request', user);
         var error;
         if (!user) {
             error = new Error ();

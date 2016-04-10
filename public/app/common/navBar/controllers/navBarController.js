@@ -10,7 +10,7 @@
 
         function open () {
             var modalInstance = modalService.getModal(true,
-                'common/modals.tmpl/templates/modalAuth.tmpl.html',
+                'common/modals/templates/modalAuth.tmpl.html',
                 'ModalAuthController',
                 'modalAuth');
         }

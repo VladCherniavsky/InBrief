@@ -4,7 +4,8 @@
             'ui.router',
             'Alertify',
             'ui.bootstrap',
-            'ngCookies'
+            'ngCookies',
+            'ngMessages'
         ])
         .config(config)
         .run(runBlock);

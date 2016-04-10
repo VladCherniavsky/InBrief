@@ -3,7 +3,6 @@ var jwtToken = require('../libs/jwtToken.js'),
 
 module.exports = function (req, res, next) {
     var token = jwtToken.getToken(req);
-    console.log('token', token);
     if (token) {
         jwtToken.verifyToken(token, config.get('key'), function (err, decoded) {
             if (err) {
@@ -14,7 +13,6 @@ module.exports = function (req, res, next) {
                 });
             } else {
                 req.decoded = decoded;
-                console.log('req.decoded', req.decoded);
                 next();
             }
         });

@@ -4,7 +4,6 @@
         .controller('LinksByTagController', LinksByTagController);
 
     function LinksByTagController (linkService, Alertify, commonService, resolvedByTag, $stateParams) {
-        console.log('getLinkByTag',resolvedByTag);
         var self = this;
         self.title = 'We have ' + resolvedByTag.count + ' links with tag: ' + $stateParams.tag;
         self.links = resolvedByTag.links;

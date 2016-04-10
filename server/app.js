@@ -26,13 +26,11 @@ app.use('/api', userRouter);
 app.use('/api', linkRouter);
 
 app.use(function(err, req, res, next) {
-    console.log(err);
     return res.status(err.status ? err.status : 500).json(err);
 });
 
 var port = process.env.PORT || config.get('port');
 app.listen(port, function() {
-    'use strict';
     console.log('server is running on port ' + port);
 });
 

@@ -28,6 +28,7 @@ var user = new Schema({
     email: {
         type: String,
         required: true,
+        unique: 'This email already exists',
         trim: true,
         lowercase: true,
         validate: {

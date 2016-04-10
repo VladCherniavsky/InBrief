@@ -4,7 +4,6 @@
         .controller('LinkEditController', LinkEditController);
 
     function LinkEditController (data, $uibModalInstance, linkService, Alertify) {
-        console.log('link', data);
         var self = this;
         self.title = 'Edit link';
         self.linkToEdit = data;
@@ -15,9 +14,8 @@
             $uibModalInstance.dismiss('cancel');
         }
         function save (editedLink) {
-            console.log('editedLink)', editedLink);
             linkService.updateLink(editedLink)
-                .then(function (res) {
+                .then(function () {
                     Alertify.success('Link updated successfully');
                     close();
                 })

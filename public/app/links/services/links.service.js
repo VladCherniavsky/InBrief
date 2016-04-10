@@ -37,14 +37,12 @@
             });
         }
         function getLinkById (linkId) {
-            console.log('linkId', linkId);
             return $http({
                 method: 'GET',
                 url: 'api/links/' + linkId
             });
         }
         function updateLink (editedLink) {
-            console.log('editedLink', editedLink);
             return $http({
                 method: 'PUT',
                 url: 'api/links',
@@ -52,14 +50,12 @@
             });
         }
         function deleteLink (linkId) {
-            console.log('linkId', linkId);
             return $http({
                 method: 'DELETE',
                 url: 'api/links/' + linkId
             });
         }
         function getLinkByTag (tag, paginationSet) {
-            console.log('tag', tag);
             return $http({
                 method: 'GET',
                 url: 'api/linksByTag/' + tag,

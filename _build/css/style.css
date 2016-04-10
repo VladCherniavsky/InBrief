@@ -258,3 +258,6 @@ a.tag-link:hover {
 
 .set-overflow {
   overflow: hidden !important; }
+
+.help-block {
+  color: red; }

@@ -16,9 +16,8 @@
                 .catch(getlinkDetailsError);
 
             function getlinkDetailsSuccess (res) {
-                console.log('res.data', res.data);
                 var modalInstance = modalService.getModal(true,
-                    'common/modals.tmpl/templates/linkDetails.tmpl.html',
+                    'common/modals/templates/linkDetails.tmpl.html',
                     'LinkDetailsController',
                     'linkDetails',
                     res.data);
@@ -30,7 +29,7 @@
 
         function editLink (link) {
             var modalInstance = modalService.getModal(true,
-                'common/modals.tmpl/templates/linkEdit.tmpl.html',
+                'common/modals/templates/linkEdit.tmpl.html',
                 'LinkEditController',
                 'linkEdit',
                 link);

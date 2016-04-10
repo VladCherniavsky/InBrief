@@ -1,5 +1,4 @@
 var Link = require('../models/link'),
-    jwtToken = require('../libs/jwtToken.js'),
     config = require('../config'),
     faker = require('faker');
 
@@ -13,8 +12,6 @@ exports.deleteLink = deleteLink;
 exports.getLinkByTag = getLinkByTag;
 
 function addLink (req, res, next) {
-    console.log('body',req.body);
-
     var link = new Link ({
         originalLink: req.body.originalLink,
         shortLink: faker.internet.password(),
@@ -27,7 +24,7 @@ function addLink (req, res, next) {
         .then(successAddLink)
         .catch(next);
 
-    function successAddLink (createdLink) {
+    function successAddLink () {
         res.end();
     }
 }
@@ -43,8 +40,6 @@ function getUserLinks (req, res, next) {
                     .catch(next);
 
                 function allLinks (links) {
-                    console.log('links', links);
-                    console.log('count', count);
                     res.json({links: links, count: count});
                 }
             });
@@ -65,14 +60,11 @@ function getAllLinks (req, res, next) {
                 .catch(next);
 
             function allLinks (links) {
-                console.log('links', links);
-                console.log('count', count);
                 res.json({links: links, count: count});
             }
         });
 }
 function redirectToLink (req, res, next) {
-    console.log(req.params);
     Link
         .findOneAndUpdate({shortLink: req.params.shortLink}, {$inc: {clicks: 1}})
         .then(function (link) {
@@ -87,7 +79,6 @@ function getLinkById (req, res, next) {
     Link
         .findOne({_id: req.params.linkId})
         .then(function (link) {
-            console.log('LINK', link);
             Link.aggregate({$match: {
                     $and: [
                         {userId: link.userId}
@@ -97,7 +88,6 @@ function getLinkById (req, res, next) {
                     if (err) {
                         next(err);
                     } else {
-                        console.log('sum', result);
                         res.json({link: link, sum: result[0].sum});
                     }
                 });
@@ -105,24 +95,21 @@ function getLinkById (req, res, next) {
         .catch(next);
 }
 function updateLink (req, res, next) {
-    console.log('update', req.body);
     Link
         .findOneAndUpdate({_id: req.body._id}, {$set: {
             tags: req.body.tags,
             description: req.body.description,
             originalLink: req.body.originalLink
         }})
-        .then(function (link) {
+        .then(function () {
             res.end();
         })
         .catch(next);
 }
 function deleteLink (req, res, next) {
-    console.log('req.params', req);
     Link
         .remove({_id: req.params.linkId})
-        .then(function (data) {
-            console.log('data', data);
+        .then(function () {
             res.end();
         })
         .catch(next);
@@ -137,8 +124,6 @@ function getLinkByTag (req, res, next) {
                 .catch(next);
 
             function allLinks (links) {
-                console.log('links', links);
-                console.log('count', count);
                 res.json({links: links, count: count});
             }
         });

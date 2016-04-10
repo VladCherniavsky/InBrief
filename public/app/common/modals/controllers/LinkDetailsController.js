@@ -16,7 +16,7 @@
             $uibModalInstance.dismiss('cancel');
         }
         function getLinksByTag (tag) {
-            $state.go('tag', {tag: tag})
+            $state.go('tag', {tag: tag});
             self.close();
         }
 

@@ -11,7 +11,6 @@
         self.cancel = cancel;
 
         function login (user) {
-            console.log('user', user);
             $rootScope.canLogin = true;
             authService
                 .loginUser(user)
@@ -25,6 +24,7 @@
             }
         }
         function signup (user) {
+            user.userName = self.user.userName;
             authService.
                 signupUser(user)
                 .then(signUpSuccess)
