@@ -6,11 +6,7 @@ module.exports = function (req, res, next) {
     if (token) {
         jwtToken.verifyToken(token, config.get('key'), function (err, decoded) {
             if (err) {
-                return res.json({
-                    success:false,
-                    message:'Failed to authenticate token',
-                    error:err
-                });
+                next(err);
             } else {
                 req.decoded = decoded;
                 next();
