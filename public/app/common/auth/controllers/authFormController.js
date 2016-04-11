@@ -34,6 +34,7 @@
                 Alertify.success(res.data);
                 Alertify.success('Log in, please');
                 self.loginTab = true;
+                self.name = 'Login to service';
                 self.user = null;
             }
         }
