@@ -20,6 +20,7 @@
                     close();
                 })
                 .catch(function (err) {
+                    console.log(err);
                     Alertify.error(err.data.message);
                 });
         }

@@ -17,8 +17,9 @@
                 }
             });
 
-        function getUserLinks (linkService, Alertify, commonService) {
-            return linkService
+        function getUserLinks (linkService, Alertify, commonService, $rootScope) {
+            if ($rootScope.logged) {
+                return linkService
                 .getUserLinks(commonService.getPaginationSet())
                 .then(function (res) {
                     commonService.checkEdit(res.data.links);
@@ -27,6 +28,8 @@
                 .catch(function (err) {
                     Alertify.error('Error getting links');
                 });
+            }
+            
         }
     }
 } ());

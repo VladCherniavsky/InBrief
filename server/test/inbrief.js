@@ -7,7 +7,6 @@ describe('authentication to service', function () {
     describe('signup user', function () {
         it('register user to service', function (done) {
             this.timeout(15000);
-            setTimeout(done, 15000);
             request(app)
                 .post('/api/signup')
                 .send({

@@ -31,7 +31,6 @@ function addLink (req, res, next) {
 }
 
 function getUserLinks (req, res, next) {
-    if (req.decoded) {
         var skipLimit = {skip: req.query.skip, limit: req.query.limit};
         Link.count({userId: req.decoded.id})
             .then(function (count) {
@@ -44,10 +43,6 @@ function getUserLinks (req, res, next) {
                     res.json({links: links, count: count});
                 }
             });
-    }
-    else {
-        res.end();
-    }
 }
 function getAllLinks (req, res, next) {
     var skipLimit = {skip: req.query.skip, limit: req.query.limit};
@@ -96,6 +91,7 @@ function getLinkById (req, res, next) {
         .catch(next);
 }
 function updateLink (req, res, next) {
+    console.log(req.decoded)
     Link
         .findOneAndUpdate({_id: req.body._id}, {$set: _.pick(req.body, ['tags', 'description', 'originalLink'])})
         .then(function () {

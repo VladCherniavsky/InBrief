@@ -3,16 +3,19 @@
         .module('InBrief')
         .controller('HomeController', HomeController);
 
-    function HomeController (resolvedUserLinks, Alertify, linkService, commonService) {
+    function HomeController (resolvedUserLinks, Alertify, linkService, commonService, $rootScope) {
         var self = this;
         self.currentPage = 1;
         self.itemsPerPage = 5;
-        self.count = resolvedUserLinks.count;
-        self.title = getTitle(resolvedUserLinks.count);
         self.addLink = addLink;
-        self.userLinks = resolvedUserLinks.links;
         self.pageChanged = pageChanged;
         self.deleteLink = deleteLink;
+        
+        if ($rootScope.logged) {
+            self.userLinks = resolvedUserLinks.links;
+            self.count = resolvedUserLinks.count;
+            self.title = getTitle(resolvedUserLinks.count);
+        }
 
         function addLink (link) {
             linkService
@@ -60,6 +63,7 @@
                         pageChanged();
                     })
                     .catch(function (err) {
+                        console.log(err);
                         Alertify.error(err.data.message);
                     });
             }
