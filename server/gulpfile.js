@@ -1,5 +1,4 @@
 var gulp = require('gulp'),
-    jshint = require('gulp-jshint'),
     jscs = require('gulp-jscs'),
     uglify = require('gulp-uglify'),
     mainBowerFiles = require('gulp-main-bower-files'),
@@ -38,10 +37,6 @@ var path = {
 
 gulp.task('style', function () {
     return gulp.src(path.serverJs)
-        .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish', {
-            verbose: true
-        }))
         .pipe(jscs())
         .pipe(jscs.reporter());
 

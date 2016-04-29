@@ -12,8 +12,8 @@ exports.updateLink = updateLink;
 exports.deleteLink = deleteLink;
 exports.getLinkByTag = getLinkByTag;
 
-function addLink (req, res, next) {
-    var link = new Link ({
+function addLink(req, res, next) {
+    var link = new Link({
         originalLink: req.body.originalLink,
         shortLink: faker.internet.password(),
         userId: req.decoded.id ? req.decoded.id : req.cookies.id,
@@ -25,45 +25,45 @@ function addLink (req, res, next) {
         .then(successAddLink)
         .catch(next);
 
-    function successAddLink () {
+    function successAddLink() {
         res.end();
     }
 }
 
-function getUserLinks (req, res, next) {
-        var skipLimit = {skip: req.query.skip, limit: req.query.limit};
-        Link.count({userId: req.decoded.id})
-            .then(function (count) {
-                return Link
-                    .find({userId: req.decoded.id}, null, skipLimit)
-                    .then(allLinks)
-                    .catch(next);
+function getUserLinks(req, res, next) {
+    var skipLimit = {skip: req.query.skip, limit: req.query.limit};
+    Link.count({userId: req.decoded.id})
+        .then(function(count) {
+            return Link
+                .find({userId: req.decoded.id}, null, skipLimit)
+                .then(allLinks)
+                .catch(next);
 
-                function allLinks (links) {
-                    res.json({links: links, count: count});
-                }
-            });
+            function allLinks(links) {
+                res.json({links: links, count: count});
+            }
+        });
 }
-function getAllLinks (req, res, next) {
+function getAllLinks(req, res, next) {
     var skipLimit = {skip: req.query.skip, limit: req.query.limit};
     var select = {originalLink: 1, shortLink: 1, description: 1, tags: 1, clicks: 1};
 
     Link.count({})
-        .then(function (count) {
+        .then(function(count) {
             return Link
                 .find({}, select, skipLimit)
                 .then(allLinks)
                 .catch(next);
 
-            function allLinks (links) {
+            function allLinks(links) {
                 res.json({links: links, count: count});
             }
         });
 }
-function redirectToLink (req, res, next) {
+function redirectToLink(req, res, next) {
     Link
         .findOneAndUpdate({shortLink: req.params.shortLink}, {$inc: {clicks: 1}})
-        .then(function (link) {
+        .then(function(link) {
             if (link) {
                 res.redirect(link.originalLink);
             }
@@ -71,7 +71,7 @@ function redirectToLink (req, res, next) {
         .catch(next);
 
 }
-function getLinkById (req, res, next) {
+function getLinkById(req, res, next) {
     Link
         .findOne({_id: req.params.linkId})
         .then(function (link) {
@@ -90,8 +90,7 @@ function getLinkById (req, res, next) {
         })
         .catch(next);
 }
-function updateLink (req, res, next) {
-    console.log(req.decoded)
+function updateLink(req, res, next) {
     Link
         .findOneAndUpdate({_id: req.body._id}, {$set: _.pick(req.body, ['tags', 'description', 'originalLink'])})
         .then(function () {
@@ -99,7 +98,7 @@ function updateLink (req, res, next) {
         })
         .catch(next);
 }
-function deleteLink (req, res, next) {
+function deleteLink(req, res, next) {
     Link
         .remove({_id: req.params.linkId})
         .then(function () {
@@ -108,7 +107,7 @@ function deleteLink (req, res, next) {
         .catch(next);
 
 }
-function getLinkByTag (req, res, next) {
+function getLinkByTag(req, res, next) {
     Link.count({tags: req.params.tag})
         .then(function (count) {
             return Link
@@ -116,7 +115,7 @@ function getLinkByTag (req, res, next) {
                 .then(allLinks)
                 .catch(next);
 
-            function allLinks (links) {
+            function allLinks(links) {
                 res.json({links: links, count: count});
             }
         });
