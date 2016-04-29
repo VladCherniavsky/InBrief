@@ -31,8 +31,8 @@ function addLink (req, res, next) {
 }
 
 function getUserLinks (req, res, next) {
-        var skipLimit = {skip: req.query.skip, limit: req.query.limit};
-        Link.count({userId: req.decoded.id})
+    var skipLimit = {skip: req.query.skip, limit: req.query.limit};
+    Link.count({userId: req.decoded.id})
             .then(function (count) {
                 return Link
                     .find({userId: req.decoded.id}, null, skipLimit)

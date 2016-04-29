@@ -10,10 +10,11 @@ var express     = require('express'),
 
 var userRouter = require('./routes/userRouter.js'),
     redirectRouter = require('./routes/redirectRouter'),
-    linkRouter = require('./routes/linkRouter.js');
+    linkRouter = require('./routes/linkRouter.js'),
+    clientRouter = require('./routes/clientRouter');
 
 var app = express();
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(methodOverride());
@@ -24,6 +25,7 @@ app.use(express.static(__dirname + '../../_build'));
 app.use('/', redirectRouter);
 app.use('/api', userRouter);
 app.use('/api', linkRouter);
+app.use('/api', clientRouter);
 
 app.use(function(err, req, res, next) {
     console.log(err);
