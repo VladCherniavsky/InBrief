@@ -1,12 +1,17 @@
 <nav class="navbar navbar-inverse" role="navigation">
     <div class="navbar-header">
-        <a class="navbar-brand" ui-sref="home" >InBrief</a>
+        <a class="navbar-brand" ui-sref="home" ><i class="icon ion-home"> </i> {{ $root.appTitle}}</a>
     </div>
     <ul class="nav navbar-nav">
-        <li ><a ui-sref="links">Links</a></li>
+        <li ><a ui-sref="links"><i class="ion-person-stalker"> </i> Clients</a></li>
+        <li ><a ui-sref="links"><i class="ion-arrow-swap"> </i> Finance</a></li>
+        <li ><a ui-sref="links"><i class="ion-social-usd"> </i>  Trades</a></li>
+        <li ><a ui-sref="links"><i class="ion-ios-telephone"> </i> Help Desk</a></li>
+        <li ><a ui-sref="links"><i class="ion-android-calendar"> </i> Tasks</a></li>
     </ul>
+
     <ul class="nav navbar-nav right">
-        <li  ng-hide="$root.logged"><a ng-click="navBar.open()">Log In</a></li>
+        <li  ng-hide="$root.logged"><a ng-click="navBar.open()"><i class="ion-person"> </i> Log In</a></li>
         <li  ng-show="$root.logged"><a  ng-click="navBar.logout()">Log Out</a></li>
     </ul>
 </nav>

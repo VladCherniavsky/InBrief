@@ -26,7 +26,6 @@
                 Alertify.error(err.data.message);
             }
         }
-
         function editLink (link) {
             var modalInstance = modalService.getModal(true,
                 'common/modals/templates/linkEdit.tmpl.html',

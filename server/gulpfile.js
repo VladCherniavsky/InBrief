@@ -15,6 +15,7 @@ var gulp = require('gulp'),
     watch = require('gulp-watch'),
     autoprefixer = require('gulp-autoprefixer'),
     sass = require('gulp-sass'),
+    livereload = require('gulp-livereload'),
     inject = require('gulp-inject');
 
 var dirs = {
@@ -24,7 +25,7 @@ var dirs = {
     assets: '../public/assets'
 };
 var path = {
-    serverJs: ['../server/**/*.js', '!../server/node_modules/**/*.js', dirs.app + '/**/*.js'],
+    serverJs: ['../server/**/*.js', '!../server/node_modules/**/*.js'],
     clientJs: [dirs.app + '/**/*.js'],
     jsFiles:['*.js', '**/*.js', '!node_modules/**/*.js', dirs.app + '/**/*.js'],
     css: [
@@ -43,14 +44,15 @@ gulp.task('style', function () {
             verbose: true
         }))
         .pipe(jscs())
-        .pipe(jscs.reporter());
+        .pipe(jscs.reporter())
+        .pipe(livereload());
 
 });
 
-gulp.task('serve', ['style'], function () {
+gulp.task('serve', ['style', 'watch'], function () {
     var options = {
         script: 'app.js',
-        delaytime: 1,
+        delaytime: 0.5,
         env: {
             'PORT': 3000
         },
@@ -58,7 +60,7 @@ gulp.task('serve', ['style'], function () {
     };
 
     return nodemon(options)
-        .on('restart', function (ven) {
+        .on('restart', function () {
             console.log('Restarting');
         });
 });
@@ -68,7 +70,8 @@ gulp.task('js:bower', function() {
         .pipe(gulpFilter('**/*.js'))
         .pipe(uglify())
         .pipe(concat('vendor.js'))
-        .pipe(gulp.dest('../_build/js'));
+        .pipe(gulp.dest('../_build/js'))
+        .pipe(livereload());
 });
 
 gulp.task('inject', function () {
@@ -83,7 +86,8 @@ gulp.task('inject', function () {
     ], {read: false});
     return gulp.src('../_build/index.html')
         .pipe(inject(sources, options))
-        .pipe(gulp.dest(dirs.dest));
+        .pipe(gulp.dest(dirs.dest))
+        .pipe(livereload());
 });
 gulp.task('js:debug',function() {
     gulp.src([
@@ -97,10 +101,10 @@ gulp.task('js:debug',function() {
         .pipe(gulp.dest(dirs.dest + '/js'));
 });
 gulp.task('watch', function() {
-    watch(dirs.app + '/**/*.js', executeTask('style'));
-    watch(dirs.app + '/**/*.js', executeTask('js:debug'));
-    watch(dirs.dest + '/js/**/*.js', executeTask('inject'));
-    watch(path.serverJs, executeTask('style'));
+    livereload.listen();
+    watch(dirs.app + '/**/*.js', executeTask('build'));
+    watch(dirs.app + '/**/*.js', executeTask('build'));
+    watch(dirs.app + '/**/*.html', executeTask('build'));
 });
 gulp.task('templates', function() {
     var opts = {
@@ -110,10 +114,11 @@ gulp.task('templates', function() {
     return gulp.src(dirs.app + '/**/*.html').pipe(minifyHTML())
         .pipe(templateCache('templates.js', {module: 'InBrief', standalone: false}))
         .pipe(uglify())
-        .pipe(gulp.dest(dirs.dest + '/js'));
+        .pipe(gulp.dest(dirs.dest + '/js'))
+        .pipe(livereload());
 });
 gulp.task('sass:compile', function() {
-    return gulp.src(dirs.assets + '/style/scss/**.*scss')
+    return gulp.src([dirs.assets + '/style/scss/**.*scss', dirs.bower + '/Ionicons/scss/**/*.scss'])
         .pipe(sass())
         .pipe(concat('style.css'))
         .pipe(gulp.dest(dirs.assets + '/style/css'));
@@ -139,7 +144,7 @@ gulp.task('fix:alertify', function () {
     return gulp.src(dirs.bower + '/ng-alertify/dist/**.*js')
         .pipe(gulp.dest(dirs.bower + '/ng-alertify/'));
 });
-gulp.task('start', function () {
+gulp.task('start',function () {
     var options = {
         script: 'app.js',
         delaytime: 1,
