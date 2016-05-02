@@ -1,0 +1,51 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6 subnav">
+            <nav class="navbar navbar-default" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li ng-repeat="item in clients.subnav track by $index"
+                        ng-class="{active: item.active}"
+                        ng-click="clients.changeActive(item)">
+                        <a ui-sref="clients">
+                            {{item.name}}
+                        </a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th> User id </th>
+                <th class="col-md-6"> Account Name </th>
+                <th> Client Status </th>
+                <th> Country </th>
+                <th> Email </th>
+                <th class="col-md-3"> Full Phone Number </th>
+                <th> Balance </th>
+                <th> Total Bonuces </th>
+                <th> Total Profit </th>
+                <th> Total Deposits </th>
+                <th class="col-md-3"> Assign To </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="client in clients.data.clients">
+                <td> {{client.userId}}</td>
+                <td class="col-md-6"> {{client.accountName}}</td>
+                <td > {{client.clientStatus}}</td>
+                <td > {{client.country}}</td>
+                <td> {{client.email}}</td>
+                <td class="col-md-3"> {{client.fullPhoneNumber}}</td>
+                <td> {{client.balance}}</td>
+                <td> {{client.totalBonuses}}</td>
+                <td> {{client.totalProfit}}</td>
+                <td> {{client.totalDeposits}}</td>
+                <td class="col-md-3"> {{client.assignedTo}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
