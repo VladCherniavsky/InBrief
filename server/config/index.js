@@ -1,5 +1,5 @@
-var nconf = require('nconf'),
-    path = require('path');
+var nconf = require('nconf');
+var path = require('path');
 
 nconf.argv()
     .env()

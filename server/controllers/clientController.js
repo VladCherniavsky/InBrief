@@ -1,13 +1,12 @@
-var Client = require('../models/client'),
-    config = require('../config'),
-    _ = require('lodash'),
-    faker = require('faker');
+var Client = require('../models/client');
+var config = require('../config');
+var _ = require('lodash');
+var faker = require('faker');
 
 exports.getAllClients = getAllClients;
 exports.addClient = addClient;
 
 function getAllClients(req, res, next) {
-    console.log('req', req);
     Client.count({})
         .then(function(count) {
             return Client

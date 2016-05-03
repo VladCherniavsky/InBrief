@@ -1,6 +1,6 @@
-var mongoose = require('mongoose'),
-    validate = require('mongoose-validator'),
-    uniqueValidator = require('mongoose-unique-validator');
+var mongoose = require('mongoose');
+var validate = require('mongoose-validator');
+var uniqueValidator = require('mongoose-unique-validator');
 
 mongoose.Promise = require('bluebird');
 

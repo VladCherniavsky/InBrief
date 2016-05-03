@@ -1,17 +1,16 @@
-var express     = require('express'),
-    bodyParser  = require('body-parser'),
-    cookieParser = require('cookie-parser'),
-    methodOverride = require('method-override'),
-    morgan      = require('morgan'),
-    favicon = require('serve-favicon'),
-    db = require('./libs/mongoose'),
-    favicon = require('serve-favicon'),
-    config = require('./config');
+var express     = require('express');
+var bodyParser  = require('body-parser');
+var cookieParser = require('cookie-parser');
+var methodOverride = require('method-override');
+var morgan = require('morgan');
+var favicon = require('serve-favicon');
+var db = require('./libs/mongoose');
+var config = require('./config');
 
-var userRouter = require('./routes/userRouter.js'),
-    redirectRouter = require('./routes/redirectRouter'),
-    linkRouter = require('./routes/linkRouter.js'),
-    clientRouter = require('./routes/clientRouter');
+var userRouter = require('./routes/userRouter.js');
+var redirectRouter = require('./routes/redirectRouter');
+var linkRouter = require('./routes/linkRouter.js');
+var clientRouter = require('./routes/clientRouter');
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));

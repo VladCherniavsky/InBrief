@@ -1,9 +1,9 @@
 (function() {
     angular
-        .module('InBrief')
-        .controller('ClientsController', ClientsController);
+    .module('InBrief')
+    .controller('ClientsController', ClientsController);
 
-    function ClientsController(resolvedClients, Alertify, linkService, commonService, $rootScope) {
+    function ClientsController(resolvedClients) {
         var self = this;
         console.log('all clients', resolvedClients);
         self.data = resolvedClients;
@@ -36,11 +36,19 @@
             {
                 name: 'Un-Active',
                 active: false
+            },
+            {
+                name: 'Un-Active',
+                active: false
+            },
+            {
+                name: 'Un-Active',
+                active: false
             }
         ];
         function changeActive(item) {
-            self.subnav.map(function(arrayItem) {
-                arrayItem.name === item.name ? arrayItem.active = true : arrayItem.active = false;
+            self.subnav.map(function(arrIt) {
+                arrIt.name === item.name ? arrIt.active = true : arrIt.active = false;
             });
         }
     }

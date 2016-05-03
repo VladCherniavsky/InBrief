@@ -1,10 +1,10 @@
-var jwtToken = require('../libs/jwtToken.js'),
-    config = require('../config');
+var jwtToken = require('../libs/jwtToken.js');
+var config = require('../config');
 
-module.exports = function (req, res, next) {
+module.exports = function(req, res, next) {
     var token = jwtToken.getToken(req);
     if (token) {
-        jwtToken.verifyToken(token, config.get('key'), function (err, decoded) {
+        jwtToken.verifyToken(token, config.get('key'), function(err, decoded) {
             if (err) {
                 next(err);
             } else {

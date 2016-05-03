@@ -10,11 +10,11 @@
         .config(config)
         .run(runBlock);
 
-    function config ($httpProvider) {
+    function config($httpProvider) {
         $httpProvider.interceptors.push('authIntercepor');
     }
-    function runBlock ($rootScope, $window, authService, commonService) {
-        $rootScope.appTitle = 'mazoomi';
+    function runBlock($rootScope, $window, authService, commonService) {
+        $rootScope.appTitle = 'Mazoomi';
         $rootScope.$on('logged', loggedProcess);
         $rootScope.$on('logout', logoutProcess);
         $rootScope.host = commonService.getHost();
@@ -23,11 +23,11 @@
             authService.defaultRequest();
             $rootScope.canLogin = true;
         }
-        function loggedProcess () {
+        function loggedProcess() {
             $rootScope.logged = true;
         }
 
-        function logoutProcess () {
+        function logoutProcess() {
             $window.localStorage.clear();
             $rootScope.logged = false;
             $rootScope.canLogin = false;

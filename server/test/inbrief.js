@@ -1,11 +1,11 @@
-var expect = require('chai').expect,
-    request = require('supertest'),
-    faker = require('faker'),
-    app = require('../app');
+var expect = require('chai').expect;
+var request = require('supertest');
+var faker = require('faker');
+var app = require('../app');
 
-describe('authentication to service', function () {
-    describe('signup user', function () {
-        it('register user to service', function (done) {
+describe('authentication to service', function() {
+    describe('signup user', function() {
+        it('register user to service', function(done) {
             this.timeout(15000);
             request(app)
                 .post('/api/signup')
@@ -22,8 +22,8 @@ describe('authentication to service', function () {
 
         });
     });
-    describe('login user,', function () {
-        it('login user to service', function (done) {
+    describe('login user,', function() {
+        it('login user to service', function(done) {
             request(app)
                 .post('/api/login')
                 .send({
@@ -41,9 +41,9 @@ describe('authentication to service', function () {
         });
     });
 });
-describe('get links', function () {
-    describe('return  all links', function () {
-        it('all links', function (done) {
+describe('get links', function() {
+    describe('return  all links', function() {
+        it('all links', function(done) {
             request(app)
                 .get('/api/links')
                 .expect(200)

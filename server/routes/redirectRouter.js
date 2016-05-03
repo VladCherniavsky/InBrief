@@ -1,6 +1,6 @@
-var express = require('express'),
-    router = express.Router(),
-    linkController = require('../controllers/linkController');
+var express = require('express');
+var router = express.Router();
+var linkController = require('../controllers/linkController');
 
 router.get('/:shortLink', linkController.redirectToLink);
 

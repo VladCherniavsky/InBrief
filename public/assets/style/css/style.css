@@ -31,18 +31,20 @@ a.tag-link:hover {
 .table thead th {
   color: #2375B5; }
 
-.subnav .navbar-default .navbar-nav .active a {
-  background-color: #fff;
-  color: #000; }
-  .subnav .navbar-default .navbar-nav .active a:before {
-    left: 0px;
-    top: 0px;
-    background-color: #2375B5;
-    display: block;
-    position: absolute;
-    content: "";
-    height: 4px;
-    width: 100%; }
+.subnav {
+  width: auto; }
+  .subnav .navbar-default .navbar-nav .active a {
+    background-color: #fff;
+    color: #000; }
+    .subnav .navbar-default .navbar-nav .active a:before {
+      left: 0px;
+      top: 0px;
+      background-color: #2375B5;
+      display: block;
+      position: absolute;
+      content: "";
+      height: 4px;
+      width: 100%; }
 
 @charset "UTF-8";
 /*!
