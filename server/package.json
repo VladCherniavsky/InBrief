@@ -37,6 +37,7 @@
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
+    "browser-sync": "^2.12.5",
     "gulp": "^3.9.1",
     "gulp-angular-filesort": "^1.1.1",
     "gulp-angular-templatecache": "^1.8.0",

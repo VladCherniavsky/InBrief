@@ -14,7 +14,7 @@
         $httpProvider.interceptors.push('authIntercepor');
     }
     function runBlock($rootScope, $window, authService, commonService) {
-        $rootScope.appTitle = 'Mazoomi';
+        $rootScope.appTitle = 'Mazoomyy';
         $rootScope.$on('logged', loggedProcess);
         $rootScope.$on('logout', logoutProcess);
         $rootScope.host = commonService.getHost();

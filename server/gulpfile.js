@@ -17,6 +17,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var sass = require('gulp-sass');
 var livereload = require('gulp-livereload');
 var inject = require('gulp-inject');
+var browserSync = require('browser-sync').create();
 
 var dirs = {
     app: '../public/app',
@@ -44,9 +45,7 @@ gulp.task('style', function() {
             verbose: true
         }))
         .pipe(jscs())
-        .pipe(jscs.reporter())
-        .pipe(livereload());
-
+        .pipe(jscs.reporter());
 });
 
 gulp.task('serve', ['style'], function() {
@@ -85,7 +84,8 @@ gulp.task('inject', function() {
     ], {read: false});
     return gulp.src('../_build/index.html')
         .pipe(inject(sources, options))
-        .pipe(gulp.dest(dirs.dest));
+        .pipe(gulp.dest(dirs.dest))
+        .pipe(browserSync.stream());
 });
 gulp.task('js:debug', function() {
     gulp.src([
@@ -103,6 +103,10 @@ gulp.task('watch', function() {
     watch(dirs.app + '/**/*.js', executeTask('build'));
     watch(dirs.app + '/**/*.html', executeTask('build'));
     watch(dirs.assets + '/style/scss/**.*scss', executeTask('build'));
+
+    browserSync.init({
+        logFileChanges: false
+    });
 });
 gulp.task('templates', function() {
 
@@ -143,13 +147,14 @@ gulp.task('build', [
   'js:bower',
   'js:debug',
   'css:compile'], function() {
-      gulp.start('inject');
-  });
+    gulp.start('inject');
+    browserSync.reload();
+});
 gulp.task('fix:alertify', function() {
     return gulp.src(dirs.bower + '/ng-alertify/dist/**.*js')
         .pipe(gulp.dest(dirs.bower + '/ng-alertify/'));
 });
-gulp.task('start',function() {
+gulp.task('start', function() {
     var options = {
         script: 'app.js',
         delaytime: 1,
