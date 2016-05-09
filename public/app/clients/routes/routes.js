@@ -18,7 +18,6 @@ function config($stateProvider, $urlRouterProvider) {
         });
 
     function getClients(clientsService, Alertify, commonService) {
-        console.log('aaaaaa');
         return clientsService
         .getClients()
         .then(function(res) {

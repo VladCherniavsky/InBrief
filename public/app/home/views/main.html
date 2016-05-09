@@ -1,42 +1,6 @@
-<div class="page-header" ng-if="!$root.logged">
+<div class="page-header">
     <div class="container">
         <h1>Welcome to {{$root.appTitle}} service </h1>
         <h6> Please log in to service</h6>
-    </div>
-</div>
-<div class="container" ng-if="$root.logged">
-    <header>
-        <h3> Try to short your link</h3>
-    </header>
-    <div class="jumbotron">
-        <div class="row">
-            <link-form
-                    action="home.addLink(link)"
-                    link = "home.link">
-            </link-form>
-        </div>
-    </div>
-    <div class="jumbotron" ng-if="home.userLinks.length > 0">
-        <div class="row">
-            <div class="container">
-                <div class="table-responsive">
-                    <links-table
-                            links = home.userLinks
-                            title = home.title
-                            delete = home.deleteLink(linkId)>
-                    </links-table>
-                </div>
-            </div>
-        </div>
-        <uib-pagination
-                total-items="home.count"
-                ng-model="home.currentPage"
-                max-size="3"
-                ng-change="home.pageChanged()"
-                rotate="true"
-                items-per-page="home.itemsPerPage"
-                boundary-link-numbers="true">
-        </uib-pagination>
-
     </div>
 </div>

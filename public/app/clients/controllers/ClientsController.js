@@ -34,15 +34,11 @@
                 active: false
             },
             {
-                name: 'New',
-                active: false
-            },
-            {
-                name: 'Potential',
-                active: false
-            },
-            {
                 name: 'Practice',
+                active: false
+            },
+            {
+                name: '8gggg8jjj',
                 active: false
             }
         ];

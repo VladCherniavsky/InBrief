@@ -1,10 +1,10 @@
-(function () {
+(function() {
     'use strict';
     angular
         .module('InBrief')
         .directive('authForm', authForm);
 
-    function authForm () {
+    function authForm() {
         return {
             restrict: 'E',
             templateUrl: 'common/auth/tmpl/auth-form-tmpl.html',

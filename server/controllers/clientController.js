@@ -10,12 +10,12 @@ function getAllClients(req, res, next) {
     Client.count({})
         .then(function(count) {
             return Client
-                .find({})
+                .find({}, null, {limit: 5})
                 .then(allClients)
                 .catch(next);
 
             function allClients(clients) {
-                console.log('clients', clients);
+
                 res.json({clients: clients, count: count});
             }
         });

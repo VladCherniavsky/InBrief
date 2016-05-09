@@ -9,17 +9,17 @@
         self.checkEdit = checkEdit;
         self.getPaginationSet = getPaginationSet;
 
-        function getHost () {
+        function getHost() {
             return $location.protocol() + '://' + $location.host() + ':' + $location.port();
         }
-        function checkEdit (links) {
+        function checkEdit(links) {
             angular.forEach(links, function(value, key) {
                 value.editable = $window.localStorage.id === value.userId && $rootScope.logged;
             });
             return links;
 
         }
-        function getPaginationSet (page, perPage) {
+        function getPaginationSet(page, perPage) {
             var defaultSet = {
                 page: page ? page : 1,
                 perPage: perPage ? perPage : 5
