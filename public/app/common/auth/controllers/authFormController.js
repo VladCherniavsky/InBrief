@@ -18,6 +18,7 @@ function AuthFormController(authService, Alertify, $state, $rootScope) {
             .catch(errorHandler);
 
         function loginSuccess(res) {
+            console.log(res);
             $state.go('home');
             Alertify.success(res.data);
             self.close();
@@ -44,6 +45,7 @@ function AuthFormController(authService, Alertify, $state, $rootScope) {
         self.close();
     }
     function errorHandler(err) {
+        console.log(err);
         if (err.data.errors) {
             for (var key in err.data.errors) {
                 if (!err.data.errors.hasOwnProperty(key)) { continue; }

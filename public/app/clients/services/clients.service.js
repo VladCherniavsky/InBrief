@@ -4,7 +4,6 @@ angular
     .service('clientsService', clientsService);
 
 function clientsService($http) {
-    console.log('sssss');
     var self = this;
     self.getClients = getClients;
 

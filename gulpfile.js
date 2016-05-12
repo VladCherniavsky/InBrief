@@ -144,6 +144,7 @@ gulp.task('build', [
   'fix:alertify',
   'templates',
   'js:bower',
+  'fonts',
   'js:debug',
   'css:compile'], function() {
     return gulp.start('inject');
@@ -151,6 +152,10 @@ gulp.task('build', [
 gulp.task('fix:alertify', function() {
     return gulp.src(dirs.bower + '/ng-alertify/dist/**.*js')
         .pipe(gulp.dest(dirs.bower + '/ng-alertify/'));
+});
+gulp.task('fonts', function() {
+    return gulp.src(dirs.bower + '/Ionicons/fonts/**/*')
+        .pipe(gulp.dest(dirs.dest + '/fonts'));
 });
 
 gulp.task('default', ['build'], function() {

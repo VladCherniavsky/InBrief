@@ -5,7 +5,6 @@
 
     function ClientsController(resolvedClients) {
         var self = this;
-        console.log('all clients', resolvedClients);
         self.data = resolvedClients;
         self.changeActive = changeActive;
         self.subnav = [

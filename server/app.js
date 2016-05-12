@@ -8,6 +8,7 @@ var db = require('./libs/mongoose');
 var config = require('./config');
 
 var clientRouter = require('./routes/clientRouter');
+var userRouter = require('./routes/userRouter');
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -18,6 +19,8 @@ app.use(morgan('dev'));
 app.use(favicon(__dirname + '../../_build/img/favicon.ico'));
 
 app.use(express.static(__dirname + '../../_build'));
+
+app.use('/api', userRouter);
 app.use('/api', clientRouter);
 
 app.use(function(err, req, res, next) {

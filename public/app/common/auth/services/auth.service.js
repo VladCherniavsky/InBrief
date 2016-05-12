@@ -26,7 +26,7 @@
         function defaultRequest() {
             return $http({
                 method: 'GET',
-                url: 'api/'
+                url: 'api/default'
             });
         }
     }

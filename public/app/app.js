@@ -20,8 +20,8 @@
         $rootScope.host = commonService.getHost();
 
         if ($window.localStorage.token) {
-            authService.defaultRequest();
             $rootScope.canLogin = true;
+            authService.defaultRequest();
         }
         function loggedProcess() {
             $rootScope.logged = true;

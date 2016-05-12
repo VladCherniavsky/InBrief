@@ -5,6 +5,7 @@ var config = require('../config');
 
 exports.signup = signup;
 exports.login = login;
+exports.defaultHandler = defaultHandler;
 
 function signup(req, res, next) {
     var user = new User({
@@ -54,4 +55,8 @@ function login(req, res, next) {
             res.json('You are logged in');
         }
     }
+}
+function defaultHandler(req, res) {
+    console.log(req);
+    res.end();
 }
