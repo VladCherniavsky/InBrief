@@ -57,6 +57,5 @@ function login(req, res, next) {
     }
 }
 function defaultHandler(req, res) {
-    console.log(req);
     res.end();
 }

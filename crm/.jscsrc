@@ -1,9 +1,0 @@
-{
-    "excludeFiles": ["node_modules/**", "bower_components/**",
-      "./_build/js/app.js"
-    ],
-    "preset": "google",
-    "maxErrors": "Infinity",
-    "maximumLineLength": 100,
-    "validateIndentation": 4
-}
