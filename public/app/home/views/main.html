@@ -1,6 +1,18 @@
-<div class="page-header">
-    <div class="container">
-        <h1>Welcome to {{$root.appTitle}} service </h1>
-        <h6> Please log in to service</h6>
-    </div>
-</div>
+<div class="container">
+  <table class="table" >
+    <thead>
+      <tr>
+        <th ng-repeat="item in home.headers track by $index">{{item}}</th>
+      </tr>
+
+    </thead>
+    <tbody>
+      <tr ng-repeat="items in home.content">
+        <td ng-repeat="va in items track by $index "><input type="text" name="name"
+          ng-change="home.onChange(items, $index, this)"
+          ng-model="va"/></td>
+    </tr>
+
+    </tbody>
+  </table> </div>
+  <button type="button" class="btn btn-default" ng-click="home.calculate()" name="button">Calcualte</button>

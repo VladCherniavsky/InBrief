@@ -46,6 +46,9 @@ a.tag-link:hover {
       height: 4px;
       width: 100%; }
 
+input {
+  width: 40px; }
+
 @charset "UTF-8";
 /*!
   Ionicons, v2.0.0
